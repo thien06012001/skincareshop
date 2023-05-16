@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
 import ShipperOrder from "./ShipperOrder";
 type Props = {};
-type options = "profile" | "order" | 'shipper';
+type options = "profile" | "order" | "shipper";
 function ShipperProfile({}: Props) {
   const router = useRouter();
   const { user } = useSelector((state: any) => state.user);
@@ -26,20 +26,24 @@ function ShipperProfile({}: Props) {
   const [address, setAddress] = useState("");
   const [avatar, setAvatar] = useState(null);
   const dispatch = useAppDispatch();
-  const [option, setOption] = useState<options | string>("profile");
+  const [option, setOption] = useState<options | string>("shipper");
 
   const logoutHandler = () => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         toast.success(res.data.message);
-        router.push('/loading')
+        router.push("/loading");
       })
       .catch((error) => {
         console.log(error.response.data.message);
       });
   };
   const List = [
+    {
+      id: "shipper",
+      title: "shipper orders",
+    },
     {
       id: "profile",
       title: "My Profile",
@@ -48,12 +52,7 @@ function ShipperProfile({}: Props) {
       id: "order",
       title: "my order",
     },
-    {
-      id: 'shipper',
-      title:'shipper orders'
-    }
   ];
-
 
   const handleImage = async (e: any) => {
     const file = e.target.files[0];
@@ -81,75 +80,78 @@ function ShipperProfile({}: Props) {
 
   return (
     <div className="flex">
-    <div className="flex h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4">
-      <div className="mx-auto flex gap-2">
-        <img
-          src={`${backend_url}${user?.avatar}`}
-          className="h-28 w-28 cursor-pointer rounded-full"
-          alt=""
-        />
-        <div className="flex flex-col gap-4">
-          <h1 className="text-lg font-bold text-white md:text-xl">
-            {user?.name}
-          </h1>
-          <div>
-            <input
-              type="file"
-              id="image"
-              className="hidden"
-              onChange={handleImage}
-            />
-            <label htmlFor="image" className="flex w-fit items-center justify-center rounded border-2 border-white bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-white cursor-pointer">
-              EDIT
-            </label>
+      <div className="flex h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4">
+        <div className="mx-auto flex gap-2">
+          <img
+            src={`${backend_url}${user?.avatar}`}
+            className="h-28 w-28 cursor-pointer rounded-full"
+            alt=""
+          />
+          <div className="flex flex-col gap-4">
+            <h1 className="text-lg font-bold text-white md:text-xl">
+              {user?.name}
+            </h1>
+            <div>
+              <input
+                type="file"
+                id="image"
+                className="hidden"
+                onChange={handleImage}
+              />
+              <label
+                htmlFor="image"
+                className="flex w-fit cursor-pointer items-center justify-center rounded border-2 border-white bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-white"
+              >
+                EDIT
+              </label>
+            </div>
+            <button
+              className="flex items-center gap-2 text-white"
+              onClick={logoutHandler}
+            >
+              <FiLogOut className="h-4 w-4" />
+              <span>SIGN OUT</span>
+            </button>
           </div>
-          <button
-            className="flex items-center gap-2 text-white"
-            onClick={logoutHandler}
-          >
-            <FiLogOut className="h-4 w-4" />
-            <span>SIGN OUT</span>
-          </button>
+        </div>
+        <div className="w-full text-start">
+          {List.map((list) => (
+            <div
+              onClick={() => setOption(list.id)}
+              className={`w-full cursor-pointer border-b border-[#2C2C2C] px-3 py-4 text-start uppercase transition-all duration-300 ${
+                option === list.id
+                  ? "bg-[#DDB7AC] text-[#2C2C2C]"
+                  : "text-white"
+              }`}
+              key={list.id}
+            >
+              {list.title}
+            </div>
+          ))}
         </div>
       </div>
-      <div className="w-full text-start">
-        {List.map((list) => (
-          <div
-            onClick={() => setOption(list.id)}
-            className={`w-full cursor-pointer border-b border-[#2C2C2C] px-3 py-4 text-start uppercase transition-all duration-300 ${
-              option === list.id
-                ? "bg-[#DDB7AC] text-[#2C2C2C]"
-                : "text-white"
-            }`}
-            key={list.id}
-          >
-            {list.title}
-          </div>
-        ))}
-      </div>
-    </div>
-    <div className="grid basis-4/5 px-3 py-10">
-      <AnimatePresence>
-        {option === "profile" ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Profile />
-          </motion.div>
-        ) : option ==='order' ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Order />
-          </motion.div>
-            ) : (
-              <motion.div
+      <div className="grid basis-4/5 px-3 py-10">
+        <AnimatePresence>
+          {option === "profile" ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Profile />
+            </motion.div>
+          ) : option === "order" ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Order />
+            </motion.div>
+          ) : (
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -157,11 +159,11 @@ function ShipperProfile({}: Props) {
             >
               <ShipperOrder />
             </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default ShipperProfile
+export default ShipperProfile;

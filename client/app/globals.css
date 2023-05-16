@@ -30,6 +30,23 @@
     transition: background-color 5000s;
     -webkit-text-fill-color: black !important;
   }
+  option:-webkit-autofill,
+  option:-webkit-autofill:hover,
+  option:-webkit-autofill:focus,
+  option:-webkit-autofill:active {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: black !important;
+  }
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  select:-webkit-autofill:active {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: black !important;
+  }
+  input{
+    @apply bg-transparent
+  }
   svg{
     @apply cursor-pointer;
   }

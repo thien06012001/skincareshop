@@ -13,8 +13,16 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    fullName: {
+        type: String,
+        required: true,
+    },
     user: {
         type: Object,
+        required: true,
+    },
+    phoneNumber: {
+        type: String,
         required: true,
     },
     totalPrice: {

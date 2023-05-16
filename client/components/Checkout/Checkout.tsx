@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import styles from "@/styles/styles";
-import { Country, State } from "country-state-city";
+import { Country, State, City } from "country-state-city";
 import { hubs } from "@/static/data";
 function Checkout() {
   const { user } = useSelector((state: any) => state.user);
@@ -15,7 +15,8 @@ function Checkout() {
   const [city, setCity] = useState("");
   const [userInfo, setUserInfo] = useState(false);
   const [address, setAddress] = useState("");
-
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [zipCode, setZipCode] = useState(null);
   const [hub, setHub] = useState("");
   const router = useRouter();
@@ -25,25 +26,30 @@ function Checkout() {
       zipCode === null ||
       country === "" ||
       city === "" ||
-      hub === ""
+      hub === "" ||
+      fullName === ""
     ) {
-      toast.error("Please choose your delivery address!");
+      toast.error("Please fill all your delivery information!");
     } else {
       const shippingAddress = {
         address,
         zipCode,
         country,
         city,
-        hub,
       };
-
+      const ordererInfo = {
+        fullName,
+        phoneNumber,
+      };
       const orderData = {
         cart,
         totalPrice,
         subTotalPrice,
         shipping,
         shippingAddress,
-        user,     
+        user,
+        ordererInfo,
+        hub,
       };
 
       // update local storage with the updated orders array
@@ -61,11 +67,16 @@ function Checkout() {
   const shipping = subTotalPrice * 0.1;
 
   const totalPrice = (subTotalPrice + shipping - subTotalPrice / 10).toFixed(2);
-
+  console.log(address);
+  console.log(zipCode);
+  console.log(country);
+  console.log(hub);
+  console.log(city);
+  console.log(fullName);
   return (
-    <div className="flex w-full flex-col items-center py-8">
-      <div className="1000px:w-[70%] 800px:flex block w-[90%]">
-        <div className="800px:w-[65%] w-full">
+    <div className="flex w-full flex-col px-5">
+      <div className="flex justify-center ">
+        <div className="basis-1/2">
           <ShippingInfo
             user={user}
             country={country}
@@ -80,9 +91,14 @@ function Checkout() {
             setZipCode={setZipCode}
             hub={hub}
             setHub={setHub}
+            fullName={fullName}
+            setFullName={setFullName}
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
           />
         </div>
-        <div className="800px:w-[35%] 800px:mt-0 mt-8 w-full">
+
+        <div className="basis-1/3">
           <CartData
             totalPrice={totalPrice}
             shipping={shipping}
@@ -91,11 +107,11 @@ function Checkout() {
         </div>
       </div>
       <div
-        className={`${styles.button} 800px:w-[280px] mt-10 w-[150px]`}
+        className={`mx-auto flex w-5/6 justify-end bg-[#F0E4DB] px-5 py-4`}
         onClick={paymentSubmit}
       >
-        <button className=" rounded-md bg-green-500 px-4 py-2 font-bold text-white">
-          Go to Payment
+        <button className=" flex items-center justify-center rounded-md bg-[#DDB7AC] px-7 py-2 text-lg font-bold text-[#55564E]">
+          Continue
         </button>
       </div>
     </div>
@@ -115,116 +131,146 @@ const ShippingInfo = ({
   setZipCode,
   hub,
   setHub,
+  fullName,
+  setFullName,
+  phoneNumber,
+  setPhoneNumber,
+  absolute,
+  setAbsolute,
 }: any) => {
   return (
-    <div className="800px:w-[95%] w-full rounded-md bg-white p-5 pb-8">
+    <div className=" w-full rounded-l-lg bg-[#F0E4DB] px-3 py-5 ">
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
       <br />
-      <form>
-        <div className="flex w-full pb-3">
-          <div className="w-[50%]">
-            <label className="block pb-2">Full Name</label>
-            <input
-              type="text"
-              value={user && user.name}
-              required
-              className={`${styles.input} !w-[95%]`}
-            />
-          </div>
-          <div className="w-[50%]">
-            <label className="block pb-2">Email Address</label>
-            <input
-              type="email"
-              value={user && user.email}
-              required
-              className={`${styles.input}`}
-            />
-          </div>
+      <form className="flex flex-col space-y-5">
+        <div className="flex flex-col gap-1 ">
+          <input
+            type="text"
+            name="FullName"
+            value={fullName}
+            placeholder="Full Name"
+            onChange={(e) => setFullName(e.target.value)}
+            id=""
+            className="border-b border-[#BBA999] outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#2C2C2C]"
+          />
         </div>
-
-        <div className="flex w-full pb-3">
-          <div className="w-[50%]">
-            <label className="block pb-2">Phone Number</label>
-            <input
-              type="number"
-              required
-              value={user && user.phoneNumber}
-              className={`${styles.input} !w-[95%]`}
-            />
-          </div>
-          <div className="w-[50%]">
-            <label className="block pb-2">Zip Code</label>
-            <input
-              type="number"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
-              required
-              className={`${styles.input}`}
-            />
-          </div>
+        <div className="flex flex-col gap-1">
+          <input
+            type="text"
+            name="phoneNumber"
+            placeholder="Phone Number"
+            id=""
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="border-b border-[#BBA999] outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#2C2C2C]"
+          />
         </div>
-
-        <div className="flex w-full pb-3">
-          <div className="w-[50%]">
-            <label className="block pb-2">Country</label>
+        <div className="flex flex-col gap-1">
+          <input
+            type="email"
+            name="Email"
+            placeholder="Email Address"
+            value={user && user.email}
+            required
+            id=""
+            className="border-b border-[#BBA999] outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#2C2C2C]"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+         
+          <input
+            type="text"
+            name="Address"
+            placeholder="Shipping Address"
+            id=""
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className="border-b border-[#BBA999] outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#2C2C2C]"
+          />
+        </div>
+        <div className="flex items-center justify-between gap-5">
+          <div className="flex w-full flex-col">
             <select
-              className="h-[40px] w-[95%] rounded-[5px] border"
-              value={country}
+              name="Country"
               onChange={(e) => setCountry(e.target.value)}
+              value={country}
+              id="Country"
+              className="border-b border-[#BBA999] bg-transparent py-1 outline-none"
             >
-              <option className="block pb-2" value=""></option>
-              {Country &&
-                Country.getAllCountries().map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
-                    {item.name}
-                  </option>
-                ))}
+              <option
+                value=""
+                className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
+              >
+                Country
+              </option>
+              {Country.getAllCountries().map((country) => (
+                <option
+                  value={country.isoCode}
+                  key={country.isoCode}
+                  className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
+                >
+                  {country.name}
+                </option>
+              ))}
             </select>
           </div>
-          <div className="w-[50%]">
-            <label className="block pb-2">City</label>
+          <div className="flex w-full flex-col">
             <select
-              className="h-[40px] w-[95%] rounded-[5px] border"
+              className="border-b border-[#BBA999] bg-transparent py-1 outline-none"
+              name="City"
               value={city}
               onChange={(e) => setCity(e.target.value)}
+              id=""
             >
-              <option className="block pb-2" value="">
-                Choose your City
+              <option
+                value=""
+                className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
+              >
+                City
               </option>
-              {State &&
-                State.getStatesOfCountry(country).map((item) => (
-                  <option key={item.isoCode} value={item.isoCode}>
-                    {item.name}
-                  </option>
-                ))}
+              {/* @ts-expect-error */}
+              {City.getCitiesOfCountry(country).map((city) => (
+                <option
+                  value={city.name}
+                  key={city.name}
+                  className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
+                >
+                  {city.name}
+                </option>
+              ))}
             </select>
           </div>
         </div>
-
-        <div className="flex w-full pb-3">
-          <div className="w-[50%]">
-            <label className="block pb-2">Shipping address</label>
+        <div className="flex items-center justify-between gap-5">
+          <div className=" flex w-full ">
             <input
-              type="address"
-              required
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              className={`${styles.input} !w-[95%]`}
+              type="text"
+              name="zipCode"
+              placeholder="Zip Code"
+              value={zipCode}
+              onChange={(e) => {
+                setZipCode(e.target.value);
+              }}
+              id=""
+              className="w-full border-b border-[#BBA999] py-1 outline-none placeholder:text-sm placeholder:font-light placeholder:text-[#2C2C2C]"
             />
           </div>
-          <div className="w-[50%]">
-            <label className="block pb-2">Distribution hub</label>
+          <div className="flex w-full flex-col">
             <select
-              className="h-[40px] w-[95%] rounded-[5px] border"
+              className="border-b border-[#BBA999] bg-transparent py-1 outline-none"
+              name="hub"
               value={hub}
               onChange={(e) => setHub(e.target.value)}
+              id=""
             >
-              <option className="block pb-2" value=""></option>
+              <option className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold">
+                Distribution Hub
+              </option>
               {hubs.map((hub) => (
                 <option
-                  key={hub.id}
                   value={hub.value}
-                  className="bg-transparent text-[#55564E]"
+                  key={hub.id}
+                  className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
                 >
                   {hub.value}
                 </option>
@@ -232,36 +278,7 @@ const ShippingInfo = ({
             </select>
           </div>
         </div>
-
-        <div></div>
       </form>
-      <h5
-        className="inline-block cursor-pointer text-[18px]"
-        onClick={() => setUserInfo(!userInfo)}
-      >
-        Choose From saved address
-      </h5>
-      {userInfo && (
-        <div>
-          {user !== undefined &&
-            user.addresses.map((item: any, index: any) => (
-              <div key={index} className="mt-1 flex w-full">
-                <input
-                  type="checkbox"
-                  className="mr-3"
-                  value={item.addressType}
-                  onClick={() =>
-                    setAddress(item.address) ||
-                    setZipCode(item.zipCode) ||
-                    setCountry(item.country) ||
-                    setCity(item.city)
-                  }
-                />
-                <h2>{item.addressType}</h2>
-              </div>
-            ))}
-        </div>
-      )}
     </div>
   );
 };
@@ -272,23 +289,30 @@ const CartData = ({
   subTotalPrice,
 }: any) => {
   return (
-    <div className="w-full rounded-md bg-[#fff] p-5 pb-8">
-      <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">${subTotalPrice}</h5>
+    <div className="h-full rounded-r-lg bg-[#F0E4DB] px-4 py-5">
+      <div className="h-full w-full rounded-md bg-[#DDB7AC] p-5 pb-8 text-[#2C2C2C]">
+        <h1 className="mb-5 text-lg font-bold">Total</h1>
+        <div className="flex flex-col space-y-5">
+          <div className="flex justify-between">
+            <h3 className="">Subtotal</h3>
+            <h5 className="">${subTotalPrice}</h5>
+          </div>
+
+          <div className="flex justify-between">
+            <h3 className="">Shipping</h3>
+            <h5 className="">${shipping.toFixed(2)}</h5>
+          </div>
+          <div className="flex justify-between pb-3">
+            <h3 className="">Discount</h3>
+            <h5 className="">${subTotalPrice / 10}</h5>
+          </div>
+        </div>
+        <hr className="my-3 border border-black" />
+        <div className="flex justify-between pb-3">
+          <h3 className="">Total</h3>
+          <h5 className="">${totalPrice}</h5>
+        </div>
       </div>
-      <br />
-      <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
-        <h5 className="text-[18px] font-[600]">${shipping.toFixed(2)}</h5>
-      </div>
-      <br />
-      <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">{subTotalPrice / 10}</h5>
-      </div>
-      <h5 className="pt-3 text-end text-[18px] font-[600]">${totalPrice}</h5>
-      <br />
     </div>
   );
 };

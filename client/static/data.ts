@@ -60,4 +60,19 @@ export const hubs = [
     value: "Ha Noi",
   },
 ];
+
+export const statusStatic = [
+  {
+    id: 1,
+    value: "Active"
+  },
+  {
+    id: 2,
+    value: "Delivered"
+  },
+  {
+    id: 1,
+    value: "Canceled"
+  },
+]
 export const types = ["Face", "Body", "Hair", "Makeup"];

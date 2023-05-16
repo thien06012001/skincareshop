@@ -15,13 +15,14 @@ import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 import CheckoutSteps from "@/components/Checkout/CheckoutSteps";
-import Payment from "@/components/Payment/Payment";
 import styles from "@/styles/styles";
 type Props = {};
 interface Order {
   cart: any;
   shippingAddress: any;
+  hub:any;
   totalPrice: any;
+  ordererInfo:any;
   paymentInfo: {
     id?: any;
     status?: any;
@@ -45,7 +46,7 @@ function PaymentPage({}: Props) {
       .create({
         purchase_units: [
           {
-            description: "Sunflower",
+            description: "Order",
             amount: {
               currency_code: "USD",
               value: orderData?.totalPrice,
@@ -66,7 +67,9 @@ function PaymentPage({}: Props) {
     cart: orderData?.cart,
     shippingAddress: orderData?.shippingAddress,
     user: user && user,
+    hub: orderData?.hub,
     totalPrice: orderData?.totalPrice,
+    ordererInfo: orderData?.ordererInfo,
     paymentInfo: orderData?.paymentInfo,
   };
 

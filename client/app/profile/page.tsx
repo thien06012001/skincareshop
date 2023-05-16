@@ -11,7 +11,13 @@ type Props = {};
 
 function ProfilePage({}: Props) {
   const { isAuthenticated, user } = useSelector((state: any) => state.user);
-  const router = useRouter()
+  setTimeout(() => {
+    if (!isAuthenticated) {
+      toast.error("You need to login to access this page.");
+      redirect("/account");
+    }
+  }, 3000);
+  const router = useRouter();
   return (
     <div>
       {user?.role === "customer" ? (

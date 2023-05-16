@@ -12,7 +12,7 @@ router.post(
   "/create-order",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { cart, shippingAddress, user, paymentInfo, totalPrice } = req.body;
+      const { cart, shippingAddress, user, paymentInfo, totalPrice, ordererInfo, hub } = req.body;
 
       //   group cart items by shopId
       const shopItemsMap = new Map();
@@ -23,18 +23,22 @@ router.post(
         }
         shopItemsMap.get(shopId).push(item);
       }
-      const hub = shippingAddress.hub;
+     
       // create an order for each shop
       const orders = [];
-
+      const fullName = ordererInfo.fullName;
+      const phoneNumber = ordererInfo.phoneNumber
       for (const [shopId, items] of shopItemsMap) {
         const order = await Order.create({
           cart: items,
           shippingAddress,
+          hub,
+          fullName,
           user,
+          phoneNumber,
           totalPrice,
           paymentInfo,
-          hub
+          
         });
         orders.push(order);
       }
@@ -91,11 +95,11 @@ router.get(
 
 // update order status for seller
 router.put(
-  "/update-order-status/:id",
+  "/update-order-status/",
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const order = await Order.findById(req.params.id);
+      const order = await Order.findById(req.body.id);
 
       if (!order) {
         return next(new ErrorHandler("Order not found with this id", 400));
@@ -106,9 +110,9 @@ router.put(
         });
       }
 
-      order.status = req.body.status;
+      order.status = req.body.orderStatus;
 
-      if (req.body.status === "Delivered") {
+      if (req.body.orderStatus === "Delivered") {
         order.deliveredAt = Date.now();
         order.paymentInfo.status = "Succeeded";
         const serviceCharge = order.totalPrice * .10;
