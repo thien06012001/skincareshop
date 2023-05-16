@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 interface CartState {
-  cart: any
+  cart: any[]
 
 }
 // const storedCartItems = String(localStorage.getItem("cartItems"))

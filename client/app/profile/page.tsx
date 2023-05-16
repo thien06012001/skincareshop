@@ -6,21 +6,29 @@ import CustomerProfile from "@/components/customer/CustomerProfile";
 import { toast } from "react-toastify";
 import VendorProfile from "@/components/vendor/VendorProfile";
 import ShipperProfile from "@/components/shipper/ShipperProfile";
-
 type Props = {};
 
 function ProfilePage({}: Props) {
   const { isAuthenticated, user } = useSelector((state: any) => state.user);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(user);
+  const router = useRouter();
+
   useEffect(() => {
-    setTimeout(() => {
-      if (!isAuthenticated) {
-        toast.error("You need to login to access this page")
-        redirect("/account");
+    let timeoutId: any = null;
+  
+    const checkUser = () => {
+      if (!isAuthenticated || user === undefined) {
+        toast.error('Please login to access this page')
+        router.push('/account');
       }
-    }, 1000);
-  }, [isAuthenticated]);
+    };
+  
+    timeoutId = setTimeout(checkUser, 2000);
+  
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isAuthenticated, user, router]);
 
   return (
     <div>

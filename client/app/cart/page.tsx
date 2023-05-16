@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -16,12 +16,26 @@ function CheckoutPage({}: Props) {
   const { isAuthenticated, user, loading } = useSelector(
     (state: any) => state.user
   );
-  setTimeout(() => {
-    if (!isAuthenticated) {
-      redirect("/account");
-    }
-  }, 2000);
+  console.log(isAuthenticated);
+  console.log(user);
+
   const router = useRouter();
+  useEffect(() => {
+    let timeoutId: any = null;
+
+    const checkUser = () => {
+      if (!isAuthenticated || user === undefined) {
+        toast.error("Please login to access this page");
+        router.push("/account");
+      }
+    };
+
+    timeoutId = setTimeout(checkUser, 2000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isAuthenticated, user, router]);
   const { cart } = useSelector((state: any) => state.cart);
   const dispatch = useAppDispatch();
   const removeFromCartHandler = (data: any) => {
@@ -47,8 +61,8 @@ function CheckoutPage({}: Props) {
   };
 
   return (
-    <div className="flex flex-col justify-center">
-      {cart !==undefined && cart && cart.length === 0 ? (
+    <div className="flex h-screen flex-col">
+      {cart !== undefined && cart && cart.length === 0 ? (
         <h5>Cart Items is empty!</h5>
       ) : (
         <div className="flex justify-center gap-2 px-3 py-4">
@@ -131,7 +145,7 @@ function CheckoutPage({}: Props) {
             </p>
             <div
               onClick={() => router.push("/checkout")}
-              className="mt-4 flex w-full items-center justify-center rounded cursor-pointer bg-[#DDB7AC] px-6 py-3 font-bold text-white"
+              className="mt-4 flex w-full cursor-pointer items-center justify-center rounded bg-[#DDB7AC] px-6 py-3 font-bold text-white"
             >
               CHECK OUT
             </div>

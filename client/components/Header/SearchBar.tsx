@@ -27,21 +27,7 @@ function SearchBar({}: Props) {
   });
   return (
     <form className="relative">
-      {/* <input type="text" className="py-2 focus:outline-none bg-transparent placeholder:text-[#BBA9998C] border-b-2 border-[#BBA999]" placeholder="Search" />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={2}
-        stroke="currentColor"
-        className="absolute right-2 top-1 h-8 w-8 text-[#BBA999] cursor-pointer"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-        />
-      </svg> */}
+    
       <input
         value={searchTerm}
         onChange={handleSearchChange}

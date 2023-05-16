@@ -13,16 +13,16 @@ import axios from "axios";
 import { server } from "@/server";
 import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import CheckoutSteps from "@/components/Checkout/CheckoutSteps";
 import styles from "@/styles/styles";
 type Props = {};
 interface Order {
   cart: any;
   shippingAddress: any;
-  hub:any;
+  hub: any;
   totalPrice: any;
-  ordererInfo:any;
+  ordererInfo: any;
   paymentInfo: {
     id?: any;
     status?: any;
@@ -34,13 +34,29 @@ function PaymentPage({}: Props) {
   const router = useRouter();
   const [orderData, setOrderData] = useState<Order | null>(null);
   const [open, setOpen] = useState(false);
-  const { user } = useSelector((state: any) => state.user);
+  const { user, isAuthenticated } = useSelector((state: any) => state.user);
   const stripe = useStripe();
   const elements = useElements();
   useEffect(() => {
     const orderData = JSON.parse(localStorage.getItem("latestOrder") || "null");
     setOrderData(orderData);
   }, []);
+  useEffect(() => {
+    let timeoutId: any = null;
+  
+    const checkUser = () => {
+      if (!isAuthenticated || user === undefined) {
+        toast.error('Please login to access this page')
+        router.push('/account');
+      }
+    };
+  
+    timeoutId = setTimeout(checkUser, 2000);
+  
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isAuthenticated, user, router]);
   const createOrder = (data: any, actions: any) => {
     return actions.order
       .create({
@@ -193,8 +209,8 @@ function PaymentPage({}: Props) {
     <div>
       <CheckoutSteps active={2} />
       <div className="flex w-full flex-col items-center py-8">
-        <div className="1000px:w-[70%] 800px:flex block w-[90%]">
-          <div className="800px:w-[65%] w-full">
+        <div className="w-[90%]">
+          <div className=" mx-auto w-full">
             <PaymentInfo
               user={user}
               open={open}
@@ -205,9 +221,9 @@ function PaymentPage({}: Props) {
               cashOnDeliveryHandler={cashOnDeliveryHandler}
             />
           </div>
-          <div className="800px:w-[35%] 800px:mt-0 mt-8 w-full">
+          {/* <div className=" mt-8 w-full">
             <CartData orderData={orderData} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
@@ -226,7 +242,7 @@ const PaymentInfo = ({
   const [select, setSelect] = useState(1);
 
   return (
-    <div className="800px:w-[95%] w-full rounded-md bg-[#fff] p-5 pb-8">
+    <div className="800px:w-[95%] w-full rounded-md bg-[#F0E4DB] p-5 pb-8">
       {/* select buttons */}
       <div>
         <div className="mb-2 flex w-full border-b pb-5">
@@ -246,21 +262,21 @@ const PaymentInfo = ({
         {/* pay with card */}
         {select === 1 ? (
           <div className="flex w-full border-b">
-            <form className="w-full" onSubmit={paymentHandler}>
+            <form className="w-full text-[#2C2C2C]" onSubmit={paymentHandler}>
               <div className="flex w-full pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Name On Card</label>
+                  <label className="block pb-2 font-light">Name On Card</label>
                   <input
                     required
                     placeholder={user && user.name}
-                    className={`${styles.input} !w-[95%] text-[#444]`}
+                    className={`w-[80%] border-b border-[#BBA999] py-3 text-[#444] outline-none`}
                     value={user && user.name}
                   />
                 </div>
                 <div className="w-[50%]">
-                  <label className="block pb-2">Exp Date</label>
+                  <label className="block pb-2 font-light">Exp Date</label>
                   <CardExpiryElement
-                    className={`${styles.input}`}
+                    className={`w-[80%] border-b border-[#BBA999] py-3`}
                     options={{
                       style: {
                         base: {
@@ -283,9 +299,9 @@ const PaymentInfo = ({
 
               <div className="flex w-full pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Card Number</label>
+                  <label className="block pb-2 font-light">Card Number</label>
                   <CardNumberElement
-                    className={`${styles.input} !h-[35px] !w-[95%]`}
+                    className={`w-[80%] border-b border-[#BBA999] py-3`}
                     options={{
                       style: {
                         base: {
@@ -305,9 +321,9 @@ const PaymentInfo = ({
                   />
                 </div>
                 <div className="w-[50%]">
-                  <label className="block pb-2">CVV</label>
+                  <label className="block pb-2 font-light">CVV</label>
                   <CardCvcElement
-                    className={`${styles.input} !h-[35px]`}
+                    className={`w-[80%] border-b border-[#BBA999] py-3`}
                     options={{
                       style: {
                         base: {
@@ -329,8 +345,8 @@ const PaymentInfo = ({
               </div>
               <input
                 type="submit"
-                value="Submit"
-                className={`${styles.button} h-[45px] cursor-pointer rounded-[5px] !bg-[#f63b60] text-[18px] font-[600] text-[#fff]`}
+                value="Order"
+                className={`cursor-pointer rounded-md bg-[#DDB7AC] px-6 py-2 font-bold text-[#55564E]`}
               />
             </form>
           </div>
@@ -357,12 +373,12 @@ const PaymentInfo = ({
         {/* pay with payement */}
         {select === 2 ? (
           <div className="flex w-full border-b">
-            <div
-              className={`${styles.button} h-[45px] cursor-pointer rounded-[5px] !bg-[#f63b60] text-[18px] font-[600] text-white`}
+            <input
+              type="submit"
+              value="Order"
               onClick={() => setOpen(true)}
-            >
-              Pay Now
-            </div>
+              className={`cursor-pointer rounded-md bg-[#DDB7AC] px-6 py-2 font-bold text-[#55564E]`}
+            />
             {open && (
               <div className="fixed left-0 top-0 z-[99999] flex h-screen w-full items-center justify-center bg-[#00000039]">
                 <div className="800px:w-[40%] 800px:h-[80vh] relative flex h-screen w-full flex-col justify-center overflow-y-scroll rounded-[5px] bg-white p-8 shadow">
@@ -415,8 +431,8 @@ const PaymentInfo = ({
             <form className="w-full" onSubmit={cashOnDeliveryHandler}>
               <input
                 type="submit"
-                value="Confirm"
-                className={`${styles.button} h-[45px] cursor-pointer rounded-[5px] !bg-[#f63b60] text-[18px] font-[600] text-[#fff]`}
+                value="Order"
+                className={`cursor-pointer rounded-md bg-[#DDB7AC] px-6 py-2 font-bold text-[#55564E]`}
               />
             </form>
           </div>
@@ -425,31 +441,31 @@ const PaymentInfo = ({
     </div>
   );
 };
-const CartData = ({ orderData }: any) => {
-  const shipping = orderData?.shipping?.toFixed(2);
-  return (
-    <div className="w-full rounded-md bg-[#fff] p-5 pb-8">
-      <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
-      </div>
-      <br />
-      <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
-        <h5 className="text-[18px] font-[600]">${shipping}</h5>
-      </div>
-      <br />
-      <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">
-          {orderData?.discountPrice ? "$" + orderData.discountPrice : "-"}
-        </h5>
-      </div>
-      <h5 className="pt-3 text-end text-[18px] font-[600]">
-        ${orderData?.totalPrice}
-      </h5>
-      <br />
-    </div>
-  );
-};
+// const CartData = ({ orderData }: any) => {
+//   const shipping = orderData?.shipping?.toFixed(2);
+//   return (
+//     <div className="w-full rounded-md bg-[#fff] p-5 pb-8">
+//       <div className="flex justify-between">
+//         <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
+//         <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
+//       </div>
+//       <br />
+//       <div className="flex justify-between">
+//         <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
+//         <h5 className="text-[18px] font-[600]">${shipping}</h5>
+//       </div>
+//       <br />
+//       <div className="flex justify-between border-b pb-3">
+//         <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
+//         <h5 className="text-[18px] font-[600]">
+//           {orderData?.discountPrice ? "$" + orderData.discountPrice : "-"}
+//         </h5>
+//       </div>
+//       <h5 className="pt-3 text-end text-[18px] font-[600]">
+//         ${orderData?.totalPrice}
+//       </h5>
+//       <br />
+//     </div>
+//   );
+// };
 export default PaymentPage;

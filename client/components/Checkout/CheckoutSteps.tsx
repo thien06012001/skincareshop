@@ -21,7 +21,7 @@ function CheckoutSteps({ active }: any) {
       >
         2. Payment
       </div>
-      <div
+      {/* <div
         className={`rounded-md font-bold ${
           active > 2
             ? "bg-[#DDB7AC] px-5 py-1 text-[#55564E]"
@@ -29,7 +29,7 @@ function CheckoutSteps({ active }: any) {
         } `}
       >
         3. Success
-      </div>
+      </div> */}
     </div>
   );
 }

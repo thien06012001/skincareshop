@@ -49,7 +49,7 @@ function ProductDetailPage({ params: { id } }: Props) {
     setData(product);
   });
   return (
-    <div py-4>
+    <div className="py-4">
       {data && data !== undefined && (
         <>
           <div className="flex gap-2 text-sm items-center p-5">

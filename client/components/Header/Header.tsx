@@ -26,18 +26,8 @@ function Header({}: Props) {
   );
   const { cart } = useSelector((state: any) => state.cart);
   const [show, setShow] = useState(false);
-
-  const logoutHandler = () => {
-    axios
-      .get(`${server}/user/logout`, { withCredentials: true })
-      .then((res) => {
-        toast.success(res.data.message);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
-  };
+    console.log(cart)
+ 
 
   return (
     <header className="sticky top-0 z-50 flex flex-col items-center justify-between gap-5 bg-[#FBF6F6] py-4 pb-0">
