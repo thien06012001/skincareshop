@@ -27,7 +27,7 @@ function CheckoutPage({}: Props) {
   const removeFromCartHandler = (data: any) => {
     dispatch(removeFromCart(data));
   };
-  const totalPrice = cart.reduce(
+  const totalPrice = cart?.reduce(
     (acc: any, item: any) => acc + item.qty * item.price,
     0
   );
@@ -48,14 +48,14 @@ function CheckoutPage({}: Props) {
 
   return (
     <div className="flex flex-col justify-center">
-      {cart && cart.length === 0 ? (
+      {cart !==undefined && cart && cart.length === 0 ? (
         <h5>Cart Items is empty!</h5>
       ) : (
         <div className="flex justify-center gap-2 px-3 py-4">
           <div className="basis-3/5 px-5">
             <h1 className="text-xl font-bold text-[#55564E] ">SHOPPING CART</h1>
             <div className="flex w-full items-center justify-end border-b border-[#F0E4DB] px-3 py-2">
-              {cart.length} Items
+              {cart?.length} Items
             </div>
             <div className="">
               {cart &&

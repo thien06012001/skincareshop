@@ -52,8 +52,8 @@ function ProductDetailPage({ params: { id } }: Props) {
     <div py-4>
       {data && data !== undefined && (
         <>
-          <div className="flex gap-2 text-lg md:text-xl lg:text-2xl">
-            <div className="flex text-base items-center gap-1">
+          <div className="flex gap-2 text-sm items-center p-5">
+            <div className="flex items-center gap-1 text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -65,10 +65,35 @@ function ProductDetailPage({ params: { id } }: Props) {
               </svg>{" "}
               Home
             </div>
-            
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+
             <span className="text-base font-normal">
               <Link href={`/category/${data.category}`}>{data.category}</Link>
             </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="h-4 w-4"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span>{data.name}</span>
           </div>
           <div className="h-screen space-y-6 p-4">
             <div className="grid grid-cols-2">

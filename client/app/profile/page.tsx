@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import CustomerProfile from "@/components/customer/CustomerProfile";
@@ -11,21 +11,29 @@ type Props = {};
 
 function ProfilePage({}: Props) {
   const { isAuthenticated, user } = useSelector((state: any) => state.user);
-  setTimeout(() => {
-    if (!isAuthenticated) {
-      toast.error("You need to login to access this page.");
-      redirect("/account");
-    }
-  }, 3000);
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  console.log(user);
+  useEffect(() => {
+    setTimeout(() => {
+      if (!isAuthenticated) {
+        toast.error("You need to login to access this page")
+        redirect("/account");
+      }
+    }, 1000);
+  }, [isAuthenticated]);
+
   return (
     <div>
-      {user?.role === "customer" ? (
-        <CustomerProfile />
-      ) : user?.role === "shipper" ? (
-        <ShipperProfile />
-      ) : (
-        <VendorProfile />
+      {user !== undefined && isAuthenticated && (
+        <div>
+          {user?.role === "customer" ? (
+            <CustomerProfile />
+          ) : user?.role === "shipper" ? (
+            <ShipperProfile />
+          ) : (
+            <VendorProfile />
+          )}
+        </div>
       )}
     </div>
   );

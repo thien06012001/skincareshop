@@ -16,7 +16,7 @@ function AccountPage({}: Props) {
   }
   return (
     <div className="background relative flex h-screen w-full items-center justify-center bg-cover bg-no-repeat px-3 ">
-      <div className="absolute top-5 left-5" onClick={() => router.back()}>
+      <div className="absolute top-5 left-5" onClick={() => router.push('/')}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

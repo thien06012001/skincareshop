@@ -1,14 +1,28 @@
 import { createReducer } from "@reduxjs/toolkit";
 interface CartState {
   cart: any
+
 }
 // const storedCartItems = String(localStorage.getItem("cartItems"))
-const initialState = {
-  cart: String(localStorage.getItem("cartItems"))
-    ? JSON.parse(String(localStorage.getItem("cartItems")))
-    : [],
-} as CartState;
+// const initialState = {
+  
+//   cart: String(localStorage.getItem("cartItems"))
+//     ? JSON.parse(String(localStorage.getItem("cartItems")))
+//     : [],
+// } as CartState;
+let initialState: CartState;
 
+if (typeof localStorage !== 'undefined') {
+  initialState = {
+    cart: String(localStorage.getItem('cartItems'))
+      ? JSON.parse(String(localStorage.getItem('cartItems')))
+      : [],
+  };
+} else {
+  initialState = {
+    cart: [],
+  };
+}
 export const cartReducer = createReducer(initialState, {
   addToCart: (state, action) => {
     const item = action.payload;

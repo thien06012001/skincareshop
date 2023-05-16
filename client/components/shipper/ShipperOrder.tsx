@@ -44,8 +44,6 @@ function ShipperOrder() {
         toast.error(error.response.data.message);
       });
   };
-  console.log(id);
-  console.log(orderStatus);
   const statusList = [
     {
       id: "active",

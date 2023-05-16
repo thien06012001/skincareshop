@@ -34,7 +34,7 @@ function Product({}: Props) {
         >
           {type}
           <div className=" flex w-full items-center justify-between px-4 py-2">
-            {allProducts &&
+            {allProducts !==undefined &&
               allProducts.length !== 0 &&
               allProducts.slice(0, 3) &&
               allProducts

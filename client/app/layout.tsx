@@ -18,7 +18,6 @@ export default function RootLayout({
   useEffect(() => {
     Store.dispatch(loadUser());
     Store.dispatch(getAllProducts());
-    
   });
   const pathname = usePathname();
   return (

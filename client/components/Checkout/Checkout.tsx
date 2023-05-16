@@ -139,7 +139,7 @@ const ShippingInfo = ({
   setAbsolute,
 }: any) => {
   return (
-    <div className=" w-full rounded-l-lg bg-[#F0E4DB] px-3 py-5 ">
+    <div className=" w-full rounded-tl-lg bg-[#F0E4DB] px-3 py-5 ">
       <h5 className="text-[18px] font-[500]">Shipping Address</h5>
       <br />
       <form className="flex flex-col space-y-5">
@@ -289,7 +289,7 @@ const CartData = ({
   subTotalPrice,
 }: any) => {
   return (
-    <div className="h-full rounded-r-lg bg-[#F0E4DB] px-4 py-5">
+    <div className="h-full rounded-tr-lg bg-[#F0E4DB] px-4 py-5">
       <div className="h-full w-full rounded-md bg-[#DDB7AC] p-5 pb-8 text-[#2C2C2C]">
         <h1 className="mb-5 text-lg font-bold">Total</h1>
         <div className="flex flex-col space-y-5">
