@@ -1,9 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
 interface CartState {
-  cart: any[]
+  cart: any
 
 }
-// const storedCartItems = String(localStorage.getItem("cartItems"))
+const storedCartItems = localStorage.getItem("cartItems")
 // const initialState = {
   
 //   cart: String(localStorage.getItem("cartItems"))
@@ -12,15 +12,15 @@ interface CartState {
 // } as CartState;
 let initialState: CartState;
 
-if (typeof localStorage !== 'undefined') {
+if (typeof storedCartItems !== 'undefined' && storedCartItems!== null) {
   initialState = {
-    cart: String(localStorage.getItem('cartItems'))
-      ? JSON.parse(String(localStorage.getItem('cartItems')))
-      : [],
+    cart: Array(storedCartItems)
+      ? JSON.parse(String(storedCartItems))
+      : <any>[],
   };
 } else {
   initialState = {
-    cart: [],
+    cart: <any>[],
   };
 }
 export const cartReducer = createReducer(initialState, {

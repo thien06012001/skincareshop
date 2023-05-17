@@ -70,7 +70,7 @@ function Product({}: Props) {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            onClick={()=> addItemToBasket(product._id)}
+                            onClick={()=> addToCartHandler(product._id)}
                             className="h-6 w-6 cursor-pointer"
                           >
                             <path

@@ -50,7 +50,28 @@ function Order({}: Props) {
                   >
                     {data.status}
                   </div>
+                  {/* <div>
+                    {data.cart.map((item: any) => (
+                      <p key={item._id}>{item.name}</p>
+                    ))}
+                  </div>
                   <div>
+                    {data.cart.map((item: any) => (
+                      <p key={item._id}>${item.price}</p>
+                    ))}
+                  </div>
+
+                  <div>
+                    {data.cart.map((item: any) => (
+                      <p key={item._id}>{item.qty}</p>
+                    ))}
+                  </div>
+                  <div>
+                    {data.cart.map((item: any) => (
+                      <p key={item._id}>${item.qty * item.price}</p>
+                    ))}
+                  </div> */}
+                   <div>
                     {data.cart.map((item: any) => (
                       <p key={item._id}>{item.name}</p>
                     ))}
@@ -84,7 +105,7 @@ function Order({}: Props) {
                         <div>
                           $
                           {data.cart.reduce(
-                            (total: number, item: any) => total + item.price,
+                            (total: number, item: any) => total + item.price*item.qty,
                             0
                           )}
                         </div>

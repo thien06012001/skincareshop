@@ -64,9 +64,9 @@ function Header({}: Props) {
               {cart?.length}
             </span>
             )} */}
-            {items && items!== undefined && (
+            {cart && cart!== undefined && (
               <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
-              {items?.length}
+              {cart?.length}
             </span>
             )}
           </Link>
