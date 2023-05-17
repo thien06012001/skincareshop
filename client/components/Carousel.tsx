@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import banner1 from "../app/assets/banner1.png";
 import banner2 from "../app/assets/banner2.png";
@@ -11,15 +10,24 @@ type Props = {};
 function HomePageCarousel({}: Props) {
   const imageList = [];
   return (
-    <Carousel>
+    <Carousel
+      autoPlay
+      infiniteLoop
+      showStatus={false}
+      showIndicators={false}
+      showThumbs={false}
+      interval={3000}
+    >
       {banners.map((banner) => (
         <div key={banner.id}>
-          <Image alt={banner.title} src={banner.image} />
+          <Image
+            alt={banner.title}
+            src={banner.image}
+            className="w-full object-contain"
+          />
         </div>
       ))}
     </Carousel>
-
-
   );
 }
 

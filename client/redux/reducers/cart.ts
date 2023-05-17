@@ -3,26 +3,32 @@ interface CartState {
   cart: any
 
 }
-const storedCartItems = localStorage.getItem("cartItems")
-// const initialState = {
+// const storedCartItems = localStorage.getItem("cartItems")
+// // const initialState = {
   
-//   cart: String(localStorage.getItem("cartItems"))
-//     ? JSON.parse(String(localStorage.getItem("cartItems")))
-//     : [],
-// } as CartState;
-let initialState: CartState;
+// //   cart: String(localStorage.getItem("cartItems"))
+// //     ? JSON.parse(String(localStorage.getItem("cartItems")))
+// //     : [],
+// // } as CartState;
+// let initialState: CartState;
 
-if (typeof storedCartItems !== 'undefined' && storedCartItems!== null) {
-  initialState = {
-    cart: Array(storedCartItems)
-      ? JSON.parse(String(storedCartItems))
-      : <any>[],
-  };
-} else {
-  initialState = {
-    cart: <any>[],
-  };
-}
+// if (typeof storedCartItems !== 'undefined' && storedCartItems!== null) {
+//   initialState = {
+//     cart: Array(storedCartItems)
+//       ? JSON.parse(String(storedCartItems))
+//       : <any>[],
+//   };
+// } else {
+//   initialState = {
+//     cart: <any>[],
+//   };
+// }
+const initialState = {
+  cart: localStorage.getItem("cartItems")
+    ? JSON.parse(String(localStorage.getItem("cartItems")))
+    : [],
+};
+
 export const cartReducer = createReducer(initialState, {
   addToCart: (state, action) => {
     const item = action.payload;
