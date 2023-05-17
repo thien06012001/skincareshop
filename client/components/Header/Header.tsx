@@ -17,6 +17,7 @@ import { server } from "@/server";
 import List from "../List";
 import CartList from "../CartList";
 import logo from "../../app/assets/Ivory.png";
+import { selectItems } from "@/redux/slices/basketSlice";
 type Props = {};
 
 function Header({}: Props) {
@@ -24,6 +25,7 @@ function Header({}: Props) {
   const { isAuthenticated, user, loading } = useSelector(
     (state: any) => state.user
   );
+  const items = useSelector(selectItems);
   const { cart } = useSelector((state: any) => state.cart);
   const [show, setShow] = useState(false);
     console.log(cart)
@@ -57,12 +59,16 @@ function Header({}: Props) {
                 d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
               />
             </svg>
-            {cart && cart!== undefined && (
+            {/* {cart && cart!== undefined && (
               <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
               {cart?.length}
             </span>
+            )} */}
+            {items && items!== undefined && (
+              <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
+              {items?.length}
+            </span>
             )}
-            
           </Link>
 
           <div className="relative">

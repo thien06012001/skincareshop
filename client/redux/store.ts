@@ -3,13 +3,14 @@ import { userReducer } from "./reducers/user";
 import { productReducer } from './reducers/product';
 import { cartReducer } from './reducers/cart';
 import { orderReducer } from './reducers/order';
-
+import basketReducer from './slices/basketSlice'
 const Store = configureStore({
     reducer: {
         user: userReducer,
         products: productReducer,
         cart: cartReducer,
         order: orderReducer,
+        basket: basketReducer,
     }
 })
 // Infer the `RootState` and `AppDispatch` types from the store itself

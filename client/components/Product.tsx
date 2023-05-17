@@ -9,10 +9,12 @@ import { backend_url } from "@/server";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "@/redux/hook";
 import { addTocart } from "@/redux/actions/cart";
+import { addToBasket, selectItems } from "@/redux/slices/basketSlice";
 type Props = {};
 
 function Product({}: Props) {
   const { allProducts } = useSelector((state: any) => state.products);
+  const items = useSelector(selectItems);
   const { cart } = useSelector((state: any) => state.cart);
   const dispatch = useAppDispatch();
   const addToCartHandler = (id: any) => {
@@ -23,6 +25,16 @@ function Product({}: Props) {
       const product = allProducts && allProducts.find((i: any) => i._id === id)
       const cartData = { ...product, qty: 1 };
       dispatch(addTocart(cartData));
+    }
+  };
+  const addItemToBasket = (id: any) => {
+    const isItemExists = items && items.find((i: any) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      const product = allProducts && allProducts.find((i: any) => i._id === id)
+      const cartData = { ...product, qty: 1 };
+      dispatch(addToBasket(cartData));
     }
   };
   return (
@@ -58,7 +70,7 @@ function Product({}: Props) {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            onClick={()=> addToCartHandler(product._id)}
+                            onClick={()=> addItemToBasket(product._id)}
                             className="h-6 w-6 cursor-pointer"
                           >
                             <path
