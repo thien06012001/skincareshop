@@ -31,7 +31,7 @@ function Header({}: Props) {
   const [show, setShow] = useState(false);
 
   return (
-    <header className={`${quicksand.className} sticky top-0 z-50 flex h-[10vh] w-full items-center justify-between bg-[#BBA999] px-3`}>
+    <header className={` sticky top-0 z-50 flex h-[10vh] w-full items-center justify-between bg-[#BBA999] px-3`}>
       {/* <div className=" flex h-full w-full items-center justify-between "> */}
       <Link href="/" className="text-xl w-[10%] font-bold text-[#FAF7F6]">
         <img

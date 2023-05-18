@@ -92,7 +92,7 @@ function VendorProfile({}: Props) {
   };
   return (
     <div className="flex flex-col lg:flex-row">
-      <div className={`"${quicksand.className} hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex"`}>
+      <div className={`${quicksand.className} hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex`}>
         <div className="mx-auto flex flex-col items-center gap-2">
           <img
             src={`${backend_url}${user?.avatar}`}
@@ -249,7 +249,7 @@ function VendorProfile({}: Props) {
         </AnimatePresence>
       </div>
         
-      <div className={`"mx-auto flex lg:hidden flex-col items-center mt-4 ${quicksand.className}"`}>
+      <div className={`mx-auto flex lg:hidden flex-col items-center mt-4 ${quicksand.className}`}>
           <img
             src={`${backend_url}${user?.avatar}`}
             className="h-28 w-28 cursor-pointer rounded-full"

@@ -27,7 +27,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`bg-[#FBF6F6] ${montserrat.className} `}>
+      <body className={`bg-[#FBF6F6] ${montserrat.className}`}>
         <Providers>
           <Notify />
           {pathname !== "/account" &&
