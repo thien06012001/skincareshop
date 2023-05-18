@@ -15,6 +15,10 @@ router.post(
     try {
       const shopId = req.body.shopId;
       const shop = await Shop.findById(shopId);
+      const { description, applicationMode, ingredients } = req.body
+      if(description.length > 500 || applicationMode.length > 500 || ingredients > 500) {
+        return next(new ErrorHandler("The content must less than 500 characters", 400));
+      }
       if (!shop) {
         return next(new ErrorHandler("Shop Id is invalid!", 400));
       } else {

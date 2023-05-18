@@ -96,7 +96,7 @@ function ProductDetailPage({ params: { id } }: Props) {
             </svg>
             <span>{data.name}</span>
           </div>
-          <div className="min-h-screen space-y-6 p-4">
+          <div className="min-h-screen space-y-6 p-4 flex flex-col">
             <div className="lg:grid lg:grid-cols-2">
               <img
                 src={`${backend_url}${data.image}`}
@@ -114,14 +114,14 @@ function ProductDetailPage({ params: { id } }: Props) {
                   </h3>
                   <p>${data.price}</p>
                 </div>
-                <div className="basis-1/3"></div>
 
-                <div className="flex basis-1/3 flex-col justify-between bg-[#F0E4DB] p-3">
+
+                <div className="flex flex-col justify-between bg-[#F0E4DB] p-3 h-fit flex-1">
                   <div className="">
                     <h1 className="text-lg font-bold md:text-xl lg:text-2xl">
                       DESCRIPTION
                     </h1>
-                    <p className={quicksand.className}>{data.description}</p>
+                    <span className={`${quicksand.className} w-full text-sm break-words overflow-auto`}>{data.description}</span>
                   </div>
                   <div className="hidden select-none flex-col gap-4 lg:flex">
                     <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
@@ -167,7 +167,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                       initial={{ height: 0, opacity: 0 }}
                       whileInView={{ height: 1, scaleY: 1, opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className={`${quicksand.className} min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 `}
+                      className={`${quicksand.className} min-h-[8rem] overflow-auto  break-words h-auto w-full bg-[#F0E4DB80] px-3 py-2 `}
                     >
                       {data.applicationMode}
                     </motion.div>
@@ -195,7 +195,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                       initial={{ height: 0, opacity: 0 }}
                       whileInView={{ height: 1, scaleY: 1, opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className={`min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 ${quicksand.className} `}
+                      className={`min-h-[8rem] overflow-auto w-full break-words h-auto bg-[#F0E4DB80] px-3 py-2 ${quicksand.className} `}
                     >
                       {data.ingredients}
                     </motion.div>

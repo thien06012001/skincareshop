@@ -9,9 +9,8 @@ import Store from "@/redux/store";
 import { loadUser } from "@/redux/actions/user";
 import Footer from "@/components/Footer";
 import { getAllProducts } from "@/redux/actions/product";
-import { Inter, Montserrat, Quicksand } from "next/font/google";
+import { Inter, Montserrat,  } from "next/font/google";
 const montserrat = Montserrat({ subsets: ["latin"] });
-const quicksand = Quicksand({ subsets: ["latin"] });
 
 
 export default function RootLayout({
@@ -30,12 +29,10 @@ export default function RootLayout({
       <body className={`bg-[#FBF6F6] ${montserrat.className}`}>
         <Providers>
           <Notify />
-          {pathname !== "/account" &&
-          <div className={quicksand.className}><Header /></div>
-            }
+          {(pathname !== "/account" && pathname !== "/loading") && <Header />}
 
           {children}
-          {pathname !== "/account" && <Footer />}
+          {(pathname !== "/account" && pathname !== "/loading") && <Footer />}
         </Providers>
       </body>
     </html>

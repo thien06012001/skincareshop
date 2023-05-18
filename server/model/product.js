@@ -27,10 +27,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter your product price!"],
   },
-  // stock: {
-  //   type: Number,
-  //   required: [true, "Please enter your product stock!"],
-  // },
+
   image:
   {
     type: String,
@@ -43,10 +40,7 @@ const productSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
-  // sold_out: {
-  //   type: Number,
-  //   default: 0,
-  // },
+
   createdAt: {
     type: Date,
     default: Date.now(),
