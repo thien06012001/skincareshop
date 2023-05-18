@@ -56,7 +56,7 @@ function Profile({}: Props) {
       <h1 className="text-xl font-bold">MY PROFILE</h1>
       <form
         onSubmit={handleSubmit}
-        className="relative flex flex-col space-y-3 px-4 py-2 "
+        className="relative flex flex-col space-y-3 py-2 "
       >
         <div className="relative px-3 border-b border-[#BBA999] py-2">
           <h1>{user?.name}</h1>

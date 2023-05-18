@@ -26,7 +26,7 @@ function SearchBar({}: Props) {
     // setActive(false);
   });
   return (
-    <form className="relative w-[30%]">
+    <form className="relative ml-auto mr:0 md:mx-0 w-[50%] md:w-[30%]">
     
       <input
         value={searchTerm}

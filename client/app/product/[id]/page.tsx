@@ -95,12 +95,12 @@ function ProductDetailPage({ params: { id } }: Props) {
             </svg>
             <span>{data.name}</span>
           </div>
-          <div className="h-screen space-y-6 p-4">
-            <div className="grid grid-cols-2">
+          <div className="min-h-screen space-y-6 p-4">
+            <div className="lg:grid lg:grid-cols-2">
               <img
                 src={`${backend_url}${data.image}`}
                 alt={data.name}
-                className="mx-auto h-[25rem] w-[80%] object-fill"
+                className="mx-auto h-[10rem] sm:h-[15rem] md:h-[25rem]  w-[80%] object-fill"
               />
 
               <div className="mx-auto flex w-[80%] flex-col justify-between">
@@ -122,7 +122,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                     </h1>
                     <p>{data.description}</p>
                   </div>
-                  <div className="flex select-none flex-col gap-4">
+                  <div className="hidden lg:flex select-none flex-col gap-4">
                     <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
                       <HiOutlineMinus
                         className="cursor-pointer"
@@ -144,7 +144,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-2">
+            <div className="lg:grid lg:grid-cols-2">
               <div className="mx-auto w-[80%] ">
                 <div className="flex items-center justify-between bg-[#F0E4DB] px-3 py-2 text-sm font-medium text-[#BBA999]">
                   MODE OF APPLICATION{" "}
@@ -201,6 +201,25 @@ function ProductDetailPage({ params: { id } }: Props) {
                   ) : null}
                 </AnimatePresence>
               </div>
+              <div className="flex lg:hidden w-[80%] mx-auto select-none flex-col gap-4 pt-3">
+                    <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
+                      <HiOutlineMinus
+                        className="cursor-pointer"
+                        onClick={decrementCount}
+                      />
+                      {count}
+                      <HiPlus
+                        onClick={incrementCount}
+                        className="cursor-pointer"
+                      />
+                    </div>
+                    <button
+                      onClick={() => addToCartHandler(data._id)}
+                      className="flex items-center justify-center bg-[#BBA999] p-4 py-2 text-sm "
+                    >
+                      Add to cart
+                    </button>
+                  </div>
             </div>
           </div>
         </>

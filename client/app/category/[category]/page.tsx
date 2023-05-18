@@ -52,42 +52,49 @@ function CategoryPage({ params: { category } }: Props) {
 
   return (
     <>
-      <div className="flex h-screen justify-center py-5">
+      <div className="flex min-h-screen flex-col justify-center gap-4 py-5 lg:flex-row">
         <div className="mx-auto flex basis-1/6 flex-col items-center">
           <div className="flex items-center gap-2 p-3 text-xl font-bold text-[#55564E]">
             <p>Price Range</p>{" "}
           </div>
 
           <div className="mt-6 flex flex-col space-y-3">
-            <div className="flex w-full items-center justify-center gap-2">
-              <div className="flex w-[40%] items-center justify-center text-sm text-[#55564E]">
-                <label className="w-[20%] mr-auto" htmlFor="min">Min</label>
+            <div className="flex w-full h-fit items-center justify-center gap-2">
+              <div className="flex h-full w-[30%] lg:w-[40%] flex-col items-center justify-between text-sm text-[#55564E]">
+                <label className="w-fit text-center" htmlFor="min">
+                  Min
+                </label>
                 <input
-                  className="rounded w-[70%] pl-1 border border-[#55564E] bg-transparent outline-none"
+                  className="w-full rounded border border-[#55564E] bg-transparent pl-1 outline-none"
                   type="number"
                   value={min}
                   id="min"
                   onChange={(e) => setMin(parseInt(e.target.value))}
                 />
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-[5%]"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 12h-15"
-                />
-              </svg>
-              <div className="flex w-[40%] items-center justify-between text-sm text-[#55564E]">
-                <label className="w-[20%]" htmlFor="max">Max</label>
+              <div className="h-[50px] flex flex-col w-[5%] justify-end">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-fit lg:h-1/2 w-full"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 12h-15"
+                  />
+                </svg>
+              </div>
+
+              <div className="flex h-full w-[30%] lg:w-[40%] flex-col items-center justify-between text-sm text-[#55564E]">
+                <label className="w-fit" htmlFor="max">
+                  Max
+                </label>
                 <input
-                  className="w-[70%] pl-1 rounded border border-[#55564E] bg-transparent outline-none"
+                  className="w-full rounded border border-[#55564E] bg-transparent pl-1 outline-none"
                   type="number"
                   placeholder="Max Value"
                   value={max}
@@ -96,26 +103,32 @@ function CategoryPage({ params: { category } }: Props) {
                 />
               </div>
             </div>
-            <button
-              onClick={sort}
-              className="flex items-center justify-center rounded-md bg-[#55564E] px-4 py-1 text-sm font-light text-[#FAF7F6]"
-            >
-              Apply
-            </button>
-            <button
-              onClick={() => setIsSort(false)}
-              className="flex items-center justify-center rounded-md bg-[#55564E] px-4 py-1 text-sm font-light text-[#FAF7F6]"
-            >
-              Reset
-            </button>
+            <div className="mb-0 flex items-center justify-around gap-0 lg:mb-3 lg:flex-col lg:justify-center lg:gap-5">
+              <button
+                onClick={sort}
+                className="flex w-fit items-center justify-center rounded-md bg-[#55564E] px-4 py-1 text-sm font-light text-[#FAF7F6] lg:w-[70%]"
+              >
+                Apply
+              </button>
+              <button
+                onClick={() => setIsSort(false)}
+                className="flex w-fit items-center justify-center rounded-md bg-[#55564E] px-4 py-1 text-sm font-light text-[#FAF7F6] lg:w-[70%]"
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </div>
-        <div className="mx-auto basis-5/6 ">
+        <div className="basis-5/6 ">
+          <h1 className="my-3 flex items-center justify-center text-xl font-bold">
+            {category} Products
+          </h1>
+
           {allProducts !== undefined &&
             allProducts.filter((product: any) => product.category === category)
               .length === 0 && <div>Do not have any product</div>}
           {isSort ? (
-            <div className="mx-auto grid  items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto grid items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
               {allProducts !== undefined &&
                 allProducts
                   .filter(
@@ -127,13 +140,16 @@ function CategoryPage({ params: { category } }: Props) {
                   .map((product: any) => (
                     <div
                       key={product._id}
-                      className="mx-auto flex w-[70%] flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                      className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
                     >
-                      <Link href={`/product/${product._id}`}>
+                      <Link
+                        className="h-[200px] w-[200px]"
+                        href={`/product/${product._id}`}
+                      >
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
-                          className="h-[20rem] w-full "
+                          className="h-full w-full object-fill"
                         />
                       </Link>
 
@@ -151,13 +167,16 @@ function CategoryPage({ params: { category } }: Props) {
                   .map((product: any) => (
                     <div
                       key={product._id}
-                      className="mx-auto flex w-[70%] flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                      className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
                     >
-                      <Link href={`/product/${product._id}`}>
+                      <Link
+                        className="h-[200px] w-[200px]"
+                        href={`/product/${product._id}`}
+                      >
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
-                          className="h-[20rem] w-full "
+                          className="h-full w-full "
                         />
                       </Link>
                       <p className=" "> {product.name}</p>

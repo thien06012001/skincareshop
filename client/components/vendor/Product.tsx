@@ -13,12 +13,12 @@ function Product({}: Props) {
   const shopProduct = allProducts.filter(
     (product: any) => product.shopId === user._id
   );
-  const list = ["Product Image", "Product Name", "Price", "Category", "Review"];
+  const list = [" Image", " Name", "Price", "Category", "Review"];
   return (
     <main className="min-h-screen">
       <ul className="mb-2 grid grid-cols-5 items-center justify-between">
         {list.map((list: any) => (
-          <li key={list} className="mx-auto font-bold text-[#2C2C2CBF]">
+          <li key={list} className="mx-auto font-bold text-[#2C2C2CBF] text-xs text-center sm:text-sm md:text-base lg:text-lg">
             {list}
           </li>
         ))}

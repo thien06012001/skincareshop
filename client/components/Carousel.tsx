@@ -14,7 +14,6 @@ function HomePageCarousel({}: Props) {
       showIndicators={false}
       showThumbs={false}
       interval={2000}
-      // className="h-[80vh]" 
     >
  
       {banners.map((banner) => (
@@ -22,7 +21,7 @@ function HomePageCarousel({}: Props) {
           <Image
             alt={banner.title}
             src={banner.image}
-            className="w-full object-contain"
+            className="w-full h-[40vh] lg:h-[90vh] object-fill"
           />
         </div>
       ))}

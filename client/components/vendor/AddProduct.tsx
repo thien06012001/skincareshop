@@ -36,8 +36,8 @@ function AddProduct({}: Props) {
     if (success) {
       toast.success("Product created successfully!");
       setIsLoading(false);
-      window.location.reload()
-  }
+      window.location.reload();
+    }
   }, [dispatch, error, success]);
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -73,13 +73,13 @@ function AddProduct({}: Props) {
     setIsLoading(false);
   };
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col px-4 py-3 min-h-screen ">
+    <form onSubmit={handleSubmit} className="flex min-h-screen flex-col py-3 ">
       <div className="space-y-3">
         <h1 className="my-6 text-lg font-bold sm:text-xl md:text-2xl lg:text-3xl">
           ADD NEW PRODUCT
         </h1>
-        <div className="flex">
-          <div className="flex basis-1/4 flex-col items-center">
+        <div className="flex flex-col items-center justify-center md:flex-row">
+          <div className="flex w-full flex-col items-center md:w-[30%]">
             {image ? (
               <img
                 src={URL.createObjectURL(image)}
@@ -121,7 +121,7 @@ function AddProduct({}: Props) {
               />
             </label>
           </div>
-          <div className="flex basis-3/4 flex-col items-center gap-6 font-bold text-[#2C2C2CBF]">
+          <div className="flex w-full md:w-[60%] mt-3 flex-col items-center gap-6 font-bold text-[#2C2C2CBF]">
             <input
               type="text"
               placeholder="Product Name"
@@ -131,9 +131,8 @@ function AddProduct({}: Props) {
               name=""
               id=""
             />
-            <div className="flex w-full gap-5">
-              <div className=" flex basis-1/2 items-center gap-5">
-                Category
+            <div className="flex w-full flex-col gap-5 md:flex-row">
+              <div className="flex w-full flex-col items-center gap-5 md:w-[45%] md:flex-row">
                 <select
                   name="category"
                   autoComplete="category"
@@ -143,21 +142,21 @@ function AddProduct({}: Props) {
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full border-b-2 border-[#55564E] bg-transparent px-3 py-2 placeholder:tracking-wider placeholder:text-[#55564E] focus:bg-transparent focus:outline-none"
                 >
-                  <option value="" className="block border pb-2">
-                    Choose the product category
+                  <option value="" className="block border pb-2 text-center">
+                    Category
                   </option>
                   {types.map((type) => (
                     <option
                       key={type}
                       value={type}
-                      className="bg-transparent text-[#55564E]"
+                      className="w-full overflow-hidden bg-transparent text-[#55564E]"
                     >
                       {type}
                     </option>
                   ))}
                 </select>
               </div>
-              <div className="w-full basis-1/2">
+              <div className="w-full md:w-[45%]">
                 <input
                   type="text"
                   placeholder="Price"

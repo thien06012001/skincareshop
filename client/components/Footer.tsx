@@ -1,8 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
+
 "use client";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from '@/app/assets/346143109_218453740935825_5751210777328414100_n.png';
 type Props = {};
 
 function Footer({}: Props) {
@@ -10,7 +13,9 @@ function Footer({}: Props) {
   const list = ["Face", "Body", "Hair", "Makeup"];
   return (
     <footer className="flex w-full flex-col items-start justify-between space-y-5 bg-[#55564E] px-5 py-6 text-lg font-semibold text-[#ECD9C9]">
-      <div className="text-2xl font-bold">LOGO</div>
+      <Link href='/' className="text-2xl font-bold">
+        <img src={logo.src} alt="logo" className="h-12 w-12 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20" />
+      </Link>
       <div className="flex w-full flex-col justify-start gap-5 md:flex-row">
         <div className="space-y-2">
           <h1 className="flex items-center justify-between gap-3">
@@ -81,7 +86,7 @@ function Footer({}: Props) {
         <Link href="#">TERMS & CONDITIONS</Link>
         <Link href="#">PRIVACY POLICY</Link>
       </div>
-      <div className="flex w-full items-center justify-center gap-4 py-3 md:justify-start">
+      <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-center gap-4 py-3 md:justify-start">
         <button className="rounded-lg border-2 border-[#ECD9C9] px-4 py-2">
           HELP CENTER
         </button>

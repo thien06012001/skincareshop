@@ -153,7 +153,6 @@ function CustomerProfile({}: Props) {
               transition={{ duration: 0.5 }}
               className={` absolute z-10 w-full `}
             >
-             
               <motion.button
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -189,7 +188,41 @@ function CustomerProfile({}: Props) {
         </AnimatePresence>
       </div>
 
-      <div className="mx-auto grid basis-4/5 px-3 py-10 w-full">
+      <div className="mx-auto mt-4 flex flex-col items-center lg:hidden">
+        <img
+          src={`${backend_url}${user?.avatar}`}
+          className="h-28 w-28 cursor-pointer rounded-full"
+          alt={user?.name}
+        />
+        <div className="flex flex-col gap-2">
+          <h1 className="text-lg font-bold text-black md:text-xl">
+            {user?.name}
+          </h1>
+          <div className="mx-auto">
+            <input
+              type="file"
+              id="image"
+              className="hidden"
+              onChange={handleImage}
+            />
+            <label
+              htmlFor="image"
+              className="flex w-fit cursor-pointer items-center justify-center rounded border-2 border-black bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-black"
+            >
+              EDIT
+            </label>
+          </div>
+          <button
+            className="mx-auto mt-2 flex items-center gap-2 text-black"
+            onClick={logoutHandler}
+          >
+            <FiLogOut className="h-4 w-4" />
+            <span>SIGN OUT</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="mx-auto grid w-full basis-4/5 px-3 py-10">
         <AnimatePresence>
           {option === "profile" ? (
             <motion.div

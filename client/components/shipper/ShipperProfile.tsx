@@ -211,6 +211,42 @@ function ShipperProfile({}: Props) {
         </AnimatePresence>
       </div>
 
+      <div className="mx-auto flex lg:hidden flex-col items-center mt-4">
+          <img
+            src={`${backend_url}${user?.avatar}`}
+            className="h-28 w-28 cursor-pointer rounded-full"
+            alt={user?.name}
+          />
+          <div className="flex flex-col gap-2">
+            <h1 className="text-lg font-bold text-black md:text-xl">
+              {user?.name}
+            </h1>
+            <div className="mx-auto">
+              <input
+                type="file"
+                id="image"
+                className="hidden"
+                onChange={handleImage}
+              />
+              <label
+                htmlFor="image"
+                className="flex w-fit cursor-pointer items-center justify-center rounded border-2 border-black bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-black"
+              >
+                EDIT
+              </label>
+            </div>
+            <button
+              className="flex items-center gap-2 text-black mx-auto mt-2"
+              onClick={logoutHandler}
+            >
+              <FiLogOut className="h-4 w-4" />
+              <span>SIGN OUT</span>
+            </button>
+          </div>
+        </div>
+
+
+
       <div className="mx-auto flex lg:basis-4/5 w-full px-3 py-10 justify-center">
         <AnimatePresence>
           {option === "profile" ? (

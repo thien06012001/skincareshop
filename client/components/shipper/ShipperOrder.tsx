@@ -81,7 +81,7 @@ function ShipperOrder() {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="flex w-full items-center justify-between border-2 bg-white p-5"
+                      className="flex flex-col md:flex-row gap-2 w-full items-center justify-between border-2 bg-white p-5"
                       key={order._id}
                     >
                       <div className="flex basis-4/5 flex-col gap-5">
@@ -170,14 +170,10 @@ function ShipperOrder() {
                     </div>
                     <div
                       key={item._id}
-                      className="bg-white p-4 text-[#2C2C2CBF]"
+                      className="bg-white text-[#2C2C2CBF]"
                     >
                       <div>
                         <div>
-                          <h1 className="flex items-center justify-between px-5 font-bold">
-                            Order ID:{" "}
-                            <span className="font-normal">{item._id}</span>
-                          </h1>
                           <h1 className="flex items-center justify-between px-5 font-bold">
                             Status:{" "}
                             <select
@@ -231,10 +227,6 @@ function ShipperOrder() {
                           <div>
                             {item.cart.map((i: any) => (
                               <div key={i._id}>
-                                <p className="flex items-center justify-between px-5  font-bold">
-                                  Product:{" "}
-                                  <span className="font-normal">{i._id}</span>
-                                </p>
                                 <p className="flex items-center justify-between px-5  font-bold">
                                   Quantity:{" "}
                                   <span className="font-normal">{i.qty}</span>

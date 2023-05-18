@@ -4,7 +4,7 @@ type Props = {};
 
 function ShopOrder({}: Props) {
   const { shopOrders } = useSelector((state: any) => state.order);
-  const list = ["Status", "Product Name", "Unit Price", "Amount", "Price"];
+  const list = ["Status", " Name", "Unit Price", "Amount", "Price"];
   return (
     <div className="min-h-screen">
       <div className="my-4 flex flex-col gap-4 space-y-4  text-[#2C2C2CBF]">
@@ -13,15 +13,15 @@ function ShopOrder({}: Props) {
             shopOrders.map((data: any) => (
               <div
                 key={data._id}
-                className=" bg-[#F0E4DB] p-5 mb-5 text-[#2C2C2CBF]"
+                className=" bg-[#F0E4DB] md:p-5 mb-5 text-[#2C2C2CBF]"
               >
-                <div className="p-5">
+                <div className="">
                   <h1 className="mb-4 text-xl font-bold text-[#2C2C2C]">
                     SHOP ORDER
                   </h1>
                   <ul className="grid grid-cols-5 items-center justify-between text-[#2C2C2CBF]">
                     {list.map((list) => (
-                      <li key={list} className="mx-auto text-lg font-bold">
+                      <li key={list} className="mx-auto text-xs md:text-base lg:text-lg font-bold text-center">
                         {list}
                       </li>
                     ))}
@@ -30,11 +30,11 @@ function ShopOrder({}: Props) {
 
                 <hr className="border border-[#BBA999]" />
                 <div
-                  className="mx-auto  grid grid-cols-5 items-center justify-between text-center"
+                  className="mx-auto flex items-center justify-between text-center"
                   key={data._id}
                 >
                   <div
-                    className={`"w-full ${
+                    className={`"w-full basis-1/5 ${
                       data.status === "Active"
                         ? "text-green-500"
                         : data.status === "Canceled"
@@ -44,25 +44,14 @@ function ShopOrder({}: Props) {
                   >
                     {data.status}
                   </div>
-                  <div>
+                  <div className="basis-4/5">
                     {data.cart.map((item: any) => (
-                      <p key={item._id}>{item.name}</p>
-                    ))}
-                  </div>
-                  <div>
-                    {data.cart.map((item: any) => (
-                      <p key={item._id}>${item.price}</p>
-                    ))}
-                  </div>
-
-                  <div>
-                    {data.cart.map((item: any) => (
-                      <p key={item._id}>{item.qty}</p>
-                    ))}
-                  </div>
-                  <div>
-                    {data.cart.map((item: any) => (
-                      <p key={item._id}>${item.qty * item.price}</p>
+                      <div className="grid grid-cols-4 w-full items-center" key={item._id}>
+                        <p>{item.name}</p>
+                        <p>${item.price}</p>
+                        <p>{item.qty}</p>
+                        <p >${item.qty * item.price}</p>
+                      </div>
                     ))}
                   </div>
                 </div>

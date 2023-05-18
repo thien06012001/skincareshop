@@ -69,7 +69,7 @@ function CheckoutPage({}: Props) {
       {cart !== undefined && cart && cart.length === 0 ? (
         <h5>Cart Items is empty!</h5>
       ) : (
-        <div className="flex justify-center gap-2 px-3 py-4">
+        <div className="flex flex-col md:flex-row justify-around gap-2 px-3 py-4">
           <div className="basis-3/5 px-5">
             <h1 className="text-xl font-bold text-[#55564E] ">SHOPPING CART</h1>
             <div className="flex w-full items-center justify-end border-b border-[#F0E4DB] px-3 py-2">
@@ -81,9 +81,9 @@ function CheckoutPage({}: Props) {
                   <>
                     <div
                       key={i._id}
-                      className="flex items-center justify-between px-3 py-2"
+                      className="flex flex-col md:flex-row items-center justify-between"
                     >
-                      <div className="flex items-center justify-center gap-3">
+                      <div className="flex md:w-[45%] w-[80%] items-center justify-center gap-3">
                         <img
                           src={`${backend_url}${i.image}`}
                           alt={i.name}
@@ -91,8 +91,8 @@ function CheckoutPage({}: Props) {
                         />
                         <p className="w-[10rem] text-sm">{i.name}</p>
                       </div>
-                      <div className="flex items-center justify-center gap-3">
-                        <p className="mr-3">${i.price * i.qty}</p>
+                      <div className="flex w-[80%] md:w-[45%] items-center justify-center gap-3">
+                        <p className="w-20">${i.price * i.qty}</p>
                         <div className="flex items-center justify-center gap-5 border-2 border-[#DDB7AC] px-3 py-1 text-[#DDB7AC]">
                           <div
                             className={`cursor-pointer`}
