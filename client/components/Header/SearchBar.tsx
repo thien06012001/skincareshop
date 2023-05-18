@@ -25,15 +25,12 @@ function SearchBar({}: Props) {
   };
 
   return (
-    <form
-      // 
-      className="mr:0 relative ml-auto w-[50%] md:mx-0 md:w-[30%]"
-    >
+    <form className="relative ml-auto w-[60%] md:mx-0 md:w-[40%]">
       <input
         value={searchTerm}
         onChange={handleSearchChange}
         onFocus={() => setActive(true)}
-        onBlur={() => setActive(false)}
+        // onBlur={() => setActive(false)}
         type="text"
         className={`border-b-2 ${quicksand.className} w-full border-[#FAF7F6] bg-transparent py-2 text-[#FAF7F6] placeholder:text-[#FAF7F6] focus:outline-none`}
         placeholder="Search"
@@ -53,10 +50,26 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div  className="absolute left-0 z-10 w-full bg-[#fff] p-3 shadow">
+        <div className="absolute left-0 z-10 w-full bg-[#fff] shadow">
+          <button className="w-full flex justify-end items-center p-3" onClick={() => setActive(false)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
           {searchData.map((i: any) => {
             return (
-              <Link  key={i._id} href={`/product/${i._id}`}>
+              <Link key={i._id} href={`/product/${i._id}`}>
                 <div className="flex items-center">
                   <img
                     src={`${backend_url}${i.image}`}

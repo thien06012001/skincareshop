@@ -14,7 +14,7 @@ import { addTocart } from "@/redux/actions/cart";
 import { addToBasket, selectItems } from "@/redux/slices/basketSlice";
 type Props = {};
 
-function Product({}: Props) {
+  function Product({}: Props) {
   const { allProducts } = useSelector((state: any) => state.products);
   const items = useSelector(selectItems);
   const { cart } = useSelector((state: any) => state.cart);
@@ -37,7 +37,7 @@ function Product({}: Props) {
           className="flex h-fit w-full flex-col items-center justify-around md:justify-around p-10 m-0"
           key={type}
         >
-          <Link href={`/category/${type}`} className="pb-10">{type}</Link>
+          <Link href={`/Products/${type}`} className="pb-10">{type}</Link>
           <div className="hidden h-2/3 w-full items-center justify-around md:flex">
             {allProducts !== undefined &&
               allProducts.length !== 0 &&

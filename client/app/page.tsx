@@ -5,15 +5,18 @@ import HomePageCarousel from "@/components/Carousel";
 import Product from "@/components/Product";
 
 import Collection from "@/components/Collection";
+import Head from "next/head";
 type Props = {};
 
 function HomePage({}: Props) {
-  
   return (
     <main>
+      
       <HomePageCarousel />
+
       <Product />
-      <hr  className="border w-full my-12"/>
+
+      <hr className="my-12 w-full border" />
       <Collection />
     </main>
   );

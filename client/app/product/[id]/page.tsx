@@ -106,7 +106,7 @@ function ProductDetailPage({ params: { id } }: Props) {
 
               <div className="mx-auto flex w-[80%] flex-col justify-between">
                 <div className="flex basis-1/3 flex-col gap-1">
-                  <h1 className="text-lg font-bold md:text-xl lg:text-2xl">
+                  <h1 className="text-lg font-bold md:text-xl lg:text-2xl break-words overflow-auto">
                     {data.name}
                   </h1>
                   <h3 className="text-sm font-semibold">

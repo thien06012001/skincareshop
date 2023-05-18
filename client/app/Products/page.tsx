@@ -13,12 +13,10 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 type Props = {
-  params: {
-    category: string;
-  };
+
 };
 type category = "All" | "Face" | "Body" | "Hair" | "Makeup";
-function AllCategoryPage({ params: { category } }: Props) {
+function AllCategoryPage({ }: Props) {
   const { allProducts } = useSelector((state: any) => state.products);
   const [show, setShow] = useState(false);
   const { cart } = useSelector((state: any) => state.cart);
