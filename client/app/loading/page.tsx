@@ -10,14 +10,7 @@ function Loading({}: Props) {
   const router = useRouter();
     const { user, isAuthenticated } = useSelector((state: any) => state.user);
   useEffect(() => {
-    // setTimeout(function () {
-  
-    //   router.refresh();
-    // }, 1000);
-    // setTimeout(function () {
-      
-    //   router.push("/account");
-    // }, 1000);
+
     if (!window.location.hash) {
       window.location.hash = 'loaded';
       window.location.reload();
@@ -25,14 +18,15 @@ function Loading({}: Props) {
       if(!isAuthenticated){
         router.push("/account");
       } 
+      else if(isAuthenticated){
+        router.push("/");
+      } 
     }
   });
 
-  // if (!isAuthenticated) {
-  //   router.push("/");
-  // }
 
-  return <div>Redirecting....</div>;
+
+  return <div className="h-full">Redirecting....</div>;
 }
 
 export default Loading;

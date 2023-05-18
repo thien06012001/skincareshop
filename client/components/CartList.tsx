@@ -14,7 +14,7 @@ type Props = {
 };
 
 function CartList({ setShow }: any) {
-  const list = ["Face", "Body", "Hair", "Makeup"];
+  const list = ["All", "Face", "Body", "Hair", "Makeup"];
   return (
     <div className="fixed left-0 top-0 z-10 h-screen w-full bg-[#0000004b]">
       <AnimatePresence>

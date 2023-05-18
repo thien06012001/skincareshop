@@ -18,9 +18,9 @@ import List from "../List";
 import CartList from "../CartList";
 import logo from "../../app/assets/346143109_218453740935825_5751210777328414100_n.png";
 import { selectItems } from "@/redux/slices/basketSlice";
-import {Quicksand} from 'next/font/google'
+import { Quicksand } from "next/font/google";
 type Props = {};
-const quicksand = Quicksand({subsets:['latin']})
+const quicksand = Quicksand({ subsets: ["latin"] });
 function Header({}: Props) {
   const router = useRouter();
   const { isAuthenticated, user, loading } = useSelector(
@@ -31,19 +31,20 @@ function Header({}: Props) {
   const [show, setShow] = useState(false);
 
   return (
-    <header className={` sticky top-0 z-50 flex h-[10vh] w-full items-center justify-between bg-[#BBA999] px-3`}>
-      {/* <div className=" flex h-full w-full items-center justify-between "> */}
-      <Link href="/" className="text-xl w-[10%] font-bold text-[#FAF7F6]">
+    <header
+      className={`${quicksand.className} sticky top-0 z-50 flex h-[10vh] w-full items-center justify-between bg-[#BBA999] px-3`}
+    >
+      <Link href="/" className="w-[10%] text-xl font-bold text-[#FAF7F6]">
         <img
           src={logo.src}
           alt="logo"
           className="h-12 w-12 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20"
         />
       </Link>
-      <div className="flex w-[80%] items-center md:justify-around md:w-[70%] lg:w-[60%]">
+      <div className="flex w-[85%] items-center md:w-[75%] md:justify-around lg:w-[65%]">
         <List />
         <SearchBar />
-        <div className="flex ml-auto mr-0 md:mx-0 w-[35%] md:w-[20%] justify-around">
+        <div className="ml-auto mr-0 flex w-[35%] justify-around md:mx-0 md:w-[20%]">
           <Link
             className="relative flex items-center justify-center px-2 py-1"
             href={"/cart"}
@@ -90,7 +91,7 @@ function Header({}: Props) {
               <div className="flex flex-col">
                 <img
                   src={`${backend_url}${user.avatar}`}
-                  className="m-auto h-10 w-10 md:h-11 md:w-11 cursor-pointer rounded-full object-cover"
+                  className="m-auto h-10 w-10 cursor-pointer rounded-full object-cover md:h-11 md:w-11"
                   alt={user.name}
                   onClick={() => setShow(!show)}
                 />
@@ -116,7 +117,6 @@ function Header({}: Props) {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </header>
   );
 }

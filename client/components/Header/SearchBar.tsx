@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { backend_url } from "@/server";
 import { Quicksand } from "next/font/google";
 type Props = {};
-const quicksand = Quicksand({subsets:['latin']})
+const quicksand = Quicksand({ subsets: ["latin"] });
 function SearchBar({}: Props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState<any>(null);
@@ -23,12 +23,12 @@ function SearchBar({}: Props) {
       );
     setSearchData(filteredProducts);
   };
-  useEffect(() => {
-    // setActive(false);
-  });
+
   return (
-    <form className="relative ml-auto mr:0 md:mx-0 w-[50%] md:w-[30%]">
-    
+    <form
+      // 
+      className="mr:0 relative ml-auto w-[50%] md:mx-0 md:w-[30%]"
+    >
       <input
         value={searchTerm}
         onChange={handleSearchChange}
@@ -53,10 +53,10 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full bg-[#fff] p-3 shadow">
+        <div  className="absolute left-0 z-10 w-full bg-[#fff] p-3 shadow">
           {searchData.map((i: any) => {
             return (
-              <Link key={i._id} href={`/product/${i._id}`}>
+              <Link  key={i._id} href={`/product/${i._id}`}>
                 <div className="flex items-center">
                   <img
                     src={`${backend_url}${i.image}`}
@@ -64,7 +64,6 @@ function SearchBar({}: Props) {
                     className="mr-2 w-[30%]"
                   />
                   <h5>{i.name}</h5>
-                  
                 </div>
               </Link>
             );

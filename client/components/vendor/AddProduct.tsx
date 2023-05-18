@@ -27,7 +27,17 @@ function AddProduct({}: Props) {
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-
+  const maxWords = 500;
+  const handleDescriptionChange = (e: any) => {
+    const input = e.target.value;
+    const words = input.length;
+    console.log(words);
+    if (words.length <= maxWords) {
+      setDescription(input);
+    }
+  };
+  let remainingWords = 500 - description.length;
+  console.log(remainingWords);
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -121,7 +131,7 @@ function AddProduct({}: Props) {
               />
             </label>
           </div>
-          <div className="flex w-full md:w-[60%] mt-3 flex-col items-center gap-6 font-bold text-[#2C2C2CBF]">
+          <div className="mt-3 flex w-full flex-col items-center gap-6 font-bold text-[#2C2C2CBF] md:w-[60%]">
             <input
               type="text"
               placeholder="Product Name"
@@ -176,6 +186,7 @@ function AddProduct({}: Props) {
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
+            <p>Max Words: 500</p>
             <p className="w-full text-start">Application Mode</p>
             <textarea
               name=""

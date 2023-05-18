@@ -39,6 +39,7 @@ function VendorProfile({}: Props) {
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         toast.success(res.data.message);
+        localStorage.setItem("cartItems", JSON.stringify([]));
         router.push("/loading");
       })
       .catch((error) => {
@@ -167,7 +168,7 @@ function VendorProfile({}: Props) {
             <motion.div
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className={` absolute z-10 w-full ${quicksand.className} `}
+              className={`absolute z-10 w-full ${quicksand.className}`}
             >
               <motion.button
                 initial={{ opacity: 0 }}

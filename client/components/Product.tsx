@@ -29,16 +29,7 @@ function Product({}: Props) {
       dispatch(addTocart(cartData));
     }
   };
-  const addItemToBasket = (id: any) => {
-    const isItemExists = items && items.find((i: any) => i._id === id);
-    if (isItemExists) {
-      toast.error("Item already in cart!");
-    } else {
-      const product = allProducts && allProducts.find((i: any) => i._id === id);
-      const cartData = { ...product, qty: 1 };
-      dispatch(addToBasket(cartData));
-    }
-  };
+
   return (
     <div className="flex flex-col divide-y-2 items-center justify-center space-y-5 m-0 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
       {types.map((type) => (
@@ -46,7 +37,7 @@ function Product({}: Props) {
           className="flex h-fit w-full flex-col items-center justify-around md:justify-around p-10 m-0"
           key={type}
         >
-          <div className="pb-10">{type}</div>
+          <Link href={`/category/${type}`} className="pb-10">{type}</Link>
           <div className="hidden h-2/3 w-full items-center justify-around md:flex">
             {allProducts !== undefined &&
               allProducts.length !== 0 &&

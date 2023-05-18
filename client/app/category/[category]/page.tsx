@@ -59,8 +59,8 @@ function CategoryPage({ params: { category } }: Props) {
           </div>
 
           <div className="mt-6 flex flex-col space-y-3">
-            <div className="flex w-full h-fit items-center justify-center gap-2">
-              <div className="flex h-full w-[30%] lg:w-[40%] flex-col items-center justify-between text-sm text-[#55564E]">
+            <div className="flex h-fit w-full items-center justify-center gap-2">
+              <div className="flex h-full w-[30%] flex-col items-center justify-between text-sm text-[#55564E] lg:w-[40%]">
                 <label className="w-fit text-center" htmlFor="min">
                   Min
                 </label>
@@ -72,14 +72,14 @@ function CategoryPage({ params: { category } }: Props) {
                   onChange={(e) => setMin(parseInt(e.target.value))}
                 />
               </div>
-              <div className="h-[50px] flex flex-col w-[5%] justify-end">
+              <div className="flex h-[50px] w-[5%] flex-col justify-end">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="h-fit lg:h-1/2 w-full"
+                  className="h-fit w-full lg:h-1/2"
                 >
                   <path
                     strokeLinecap="round"
@@ -89,7 +89,7 @@ function CategoryPage({ params: { category } }: Props) {
                 </svg>
               </div>
 
-              <div className="flex h-full w-[30%] lg:w-[40%] flex-col items-center justify-between text-sm text-[#55564E]">
+              <div className="flex h-full w-[30%] flex-col items-center justify-between text-sm text-[#55564E] lg:w-[40%]">
                 <label className="w-fit" htmlFor="max">
                   Max
                 </label>
@@ -125,33 +125,71 @@ function CategoryPage({ params: { category } }: Props) {
           </h1>
 
           {allProducts !== undefined &&
-            allProducts.filter((product: any) => product.category === category)
+            allProducts
               .length === 0 && <div>Do not have any product</div>}
           {isSort ? (
             <div className="mx-auto grid items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
               {allProducts !== undefined &&
                 allProducts
                   .filter(
-                    (product: any) =>
-                      product.category === category &&
+                    (product: any) => 
+                      product.category === category || category === 'All' &&
                       product.price >= min &&
-                      product.price <= max
+                      product.price <= max 
                   )
                   .map((product: any) => (
                     <div
                       key={product._id}
                       className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
                     >
-                      <Link
-                        className="h-[200px] w-[200px]"
-                        href={`/product/${product._id}`}
+                      <div
+                        className="h-[200px] w-[200px] relative"
                       >
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
                           className="h-full w-full object-fill"
                         />
-                      </Link>
+                        <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
+                        <div className="flex basis-4/5 items-center justify-center gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            onClick={() => addToCartHandler(product._id)}
+                            className="h-6 w-6 cursor-pointer"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-6 w-6 cursor-pointer"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                            />
+                          </svg>
+                        </div>
+                        <Link
+                          href={`product/${product._id}`}
+                          className="flex basis-1/5 items-center justify-center bg-[#BBA99975] text-center text-sm text-[#2C2C2C]"
+                        >
+                          View the product
+                        </Link>
+                      </div>
+                      </div>
 
                       <p className=" "> {product.name}</p>
 
@@ -163,22 +201,60 @@ function CategoryPage({ params: { category } }: Props) {
             <div className="mx-auto grid items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
               {allProducts !== undefined &&
                 allProducts
-                  .filter((product: any) => product.category === category)
+                  .filter((product: any) =>category === 'All' || product.category === category)
                   .map((product: any) => (
                     <div
                       key={product._id}
                       className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
                     >
-                      <Link
-                        className="h-[200px] w-[200px]"
-                        href={`/product/${product._id}`}
+                      <div
+                        className="h-[200px] w-[200px] relative"
                       >
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
                           className="h-full w-full "
                         />
-                      </Link>
+                        <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
+                        <div className="flex basis-4/5 items-center justify-center gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            onClick={() => addToCartHandler(product._id)}
+                            className="h-6 w-6 cursor-pointer"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-6 w-6 cursor-pointer"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                            />
+                          </svg>
+                        </div>
+                        <Link
+                          href={`product/${product._id}`}
+                          className="flex basis-1/5 items-center justify-center bg-[#BBA99975] text-center text-sm text-[#2C2C2C]"
+                        >
+                          View the product
+                        </Link>
+                      </div>
+                      </div>
                       <p className=" "> {product.name}</p>
 
                       <p>${product.price}</p>

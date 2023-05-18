@@ -35,6 +35,7 @@ function CustomerProfile({}: Props) {
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         router.push("/loading");
+        localStorage.setItem("cartItems", JSON.stringify([]));
         toast.success(res.data.message);
       })
       .catch((error) => {
@@ -153,7 +154,7 @@ function CustomerProfile({}: Props) {
             <motion.div
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className={` absolute z-10 w-full ${quicksand.className} `}
+              className={`absolute z-10 w-full ${quicksand.className}`}
             >
               <motion.button
                 initial={{ opacity: 0 }}
