@@ -53,7 +53,7 @@ function ProductDetailPage({ params: { id } }: Props) {
       {data && data !== undefined && (
         <>
           <div className="flex gap-2 text-sm items-center p-5">
-            <div className="flex items-center gap-1 text-base">
+            <Link href='/' className="flex items-center gap-1 text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -64,7 +64,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                 <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
               </svg>{" "}
               Home
-            </div>
+            </Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

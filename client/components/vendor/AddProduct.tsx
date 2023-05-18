@@ -73,12 +73,12 @@ function AddProduct({}: Props) {
     setIsLoading(false);
   };
   return (
-    <form onSubmit={handleSubmit} className="flex min-h-screen flex-col py-3 ">
-      <div className="space-y-3">
-        <h1 className="my-6 text-lg font-bold sm:text-xl md:text-2xl lg:text-3xl">
+    <form onSubmit={handleSubmit} className="flex min-h-screen flex-col">
+      <div className="">
+        <h1 className="pb-10 text-lg font-bold sm:text-xl md:text-2xl lg:text-3xl">
           ADD NEW PRODUCT
         </h1>
-        <div className="flex flex-col items-center justify-center md:flex-row">
+        <div className="flex flex-col justify-center md:flex-row">
           <div className="flex w-full flex-col items-center md:w-[30%]">
             {image ? (
               <img
