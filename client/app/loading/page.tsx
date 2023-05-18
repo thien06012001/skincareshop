@@ -8,20 +8,26 @@ type Props = {};
 
 function Loading({}: Props) {
   const router = useRouter();
-
+    const { user, isAuthenticated } = useSelector((state: any) => state.user);
   useEffect(() => {
-    setTimeout(function () {
-        // window.location.reload();
-        router.refresh();
-
-    }, 1000);
-    setTimeout(function () {
-      // window.location.reload();
-      router.push('/account');
-      
-  }, 1000);
-  });
+    // setTimeout(function () {
   
+    //   router.refresh();
+    // }, 1000);
+    // setTimeout(function () {
+      
+    //   router.push("/account");
+    // }, 1000);
+    if (!window.location.hash) {
+      window.location.hash = 'loaded';
+      window.location.reload();
+    } else {
+      if(!isAuthenticated){
+        router.push("/account");
+      } 
+    }
+  });
+
   // if (!isAuthenticated) {
   //   router.push("/");
   // }

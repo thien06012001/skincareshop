@@ -12,7 +12,7 @@ function Order({}: Props) {
   const { orders } = useSelector((state: any) => state.order);
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <div className="my-4 flex flex-col gap-4 space-y-4 text-[#2C2C2CBF]">
         
         <div className="flex flex-col">

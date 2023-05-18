@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { server } from "@/server";
 import List from "../List";
 import CartList from "../CartList";
-import logo from "../../app/assets/Ivory.png";
+import logo from "../../app/assets/346143109_218453740935825_5751210777328414100_n.png";
 import { selectItems } from "@/redux/slices/basketSlice";
 type Props = {};
 
@@ -31,64 +31,63 @@ function Header({}: Props) {
   console.log(cart);
 
   return (
-    <header className="fixed bottom-0 z-50 flex w-full flex-col items-center justify-between gap-5 bg-[#FBF6F6] py-4 pb-0 md:sticky md:top-0">
-      <div className="hidden w-full items-center justify-between px-3 md:flex">
-        <Link href="/" className="text-xl font-bold text-[#BBA999]">
+    <header className="sticky top-0 z-50 flex w-full flex-col items-center justify-between gap-5 bg-[#BBA999] ">
+      <div className=" flex w-full items-center justify-between px-3">
+        <Link href="/" className="text-xl font-bold text-[#FAF7F6]">
           <img
             src={logo.src}
-            alt=""
+            alt="logo"
             className="h-12 w-12 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20"
           />
         </Link>
-        <div className="flex items-center gap-5">
+        <div className="flex w-[60%] items-center justify-around">
+          <List />
           <SearchBar />
           {show && <CartList setShow={setShow} />}
-          <Link className="relative px-2 py-1" href={"/cart"}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-8 w-8 cursor-pointer text-[#BBA999]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
-            {/* {cart && cart!== undefined && (
-              <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
-              {cart?.length}
-            </span>
-            )} */}
-            {cart && cart !== undefined && (
-              <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
-                {cart?.length}
-              </span>
-            )}
-          </Link>
+          <div className="flex w-[20%] justify-around">
+            <Link className="flex items-center justify-center relative px-2 py-1" href={"/cart"}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                />
+              </svg>
+              {cart && cart !== undefined && (
+                <span className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
+                  {cart?.length}
+                </span>
+              )}
+            </Link>
 
-          <div className="relative">
-            {user ? (
-              <img
-                onClick={() => router.push("/profile")}
-                src={`${backend_url}${user?.avatar}`}
-                className="h-[35px] w-[35px] cursor-pointer rounded-full"
-                alt=""
-              />
-            ) : (
-              <BiUser
-                className="h-8 w-8 cursor-pointer text-[#BBA999]"
-                onClick={() => router.push("/account")}
-              />
-            )}
+            <div className="flex relative items-center justify-center w-[40px] h-[40px]">
+              {user ? (
+                <Link href='/profile'>
+                  <img
+                    src={`${backend_url}${user.avatar}`}
+                    className="m-auto h-full w-full cursor-pointer rounded-full object-cover"
+                    alt={user.name}
+                  />
+                </Link>
+              ) : (
+                <BiUser
+                  className="m-auto h-12 w-12 cursor-pointer text-[#FAF7F6]"
+                  onClick={() => router.push("/account")}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
-      <List />
-      <div className="bg-[#F0E4DB] flex md:hidden text-[#BBA999] items-center justify-evenly w-full">
+
+      {/* <div className="flex w-full items-center justify-evenly bg-[#F0E4DB] text-[#BBA999] md:hidden">
         <Link href={"/"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,34 +119,34 @@ function Header({}: Props) {
           />
         </svg>
         <Link className="relative px-2 py-1" href={"/cart"}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-8 w-8 cursor-pointer text-[#BBA999]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
-            {cart && cart !== undefined && (
-              <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
-                {cart?.length}
-              </span>
-            )}
-          </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-8 w-8 cursor-pointer text-[#BBA999]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            />
+          </svg>
+          {cart && cart !== undefined && (
+            <span className="absolute right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#BBA999] text-center text-xs text-[#FBF6F6]">
+              {cart?.length}
+            </span>
+          )}
+        </Link>
 
-        <div className="relative">
+        <div className="w-96 h-96">
           {user ? (
             <img
               onClick={() => router.push("/profile")}
-              src={`${backend_url}${user?.avatar}`}
-              className="h-[35px] w-[35px] cursor-pointer rounded-full"
-              alt=""
+              src={`${backend_url}${user.avatar}`}
+              className="h-[35px] w-[35px] cursor-pointer rounded-full object-cover"
+              alt={user.name}
             />
           ) : (
             <BiUser
@@ -156,7 +155,7 @@ function Header({}: Props) {
             />
           )}
         </div>
-      </div>
+      </div> */}
     </header>
   );
 }

@@ -28,11 +28,11 @@ function VendorLoginForm({}: Props) {
         { withCredentials: true }
       )
       .then((res) => {
-        toast.success("Login Success!");
         navigate.push(`/dashboard/vendor`);
+        toast.success("Login Success!");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         toast.error(err.response.data.message);
       });
   };

@@ -57,12 +57,13 @@ function Profile({}: Props) {
     setShow(false);
   };
 
-  return (
-    <div className="m-auto w-[60%] bg-[#F0E4DB] px-4 py-3 text-[#2C2C2C]">
+  return ( 
+    <div className="min-h-screen">
+       <div className="m-auto w-full bg-[#F0E4DB] px-4 py-3 text-[#2C2C2C]">
       <h1 className="text-xl font-bold">MY PROFILE</h1>
       <form
         onSubmit={handleSubmit}
-        className="relative flex flex-col space-y-3 px-4 py-2"
+        className="relative flex flex-col space-y-3 px-4 py-2 w-full"
       >
         <div className="relative border-b border-[#BBA999] py-2">
           <h1>{user?.name}</h1>
@@ -292,6 +293,8 @@ function Profile({}: Props) {
         </button>
       </div>
     </div>
+    </div>
+   
   );
 }
 

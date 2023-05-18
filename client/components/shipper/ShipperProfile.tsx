@@ -15,6 +15,7 @@ import { server } from "@/server";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
 import ShipperOrder from "./ShipperOrder";
+import { VscTriangleRight } from "react-icons/vsc";
 type Props = {};
 type options = "profile" | "order" | "shipper";
 function ShipperProfile({}: Props) {
@@ -27,7 +28,7 @@ function ShipperProfile({}: Props) {
   const [avatar, setAvatar] = useState(null);
   const dispatch = useAppDispatch();
   const [option, setOption] = useState<options | string>("shipper");
-
+  const [show, setShow] = useState(false);
   const logoutHandler = () => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
@@ -79,19 +80,19 @@ function ShipperProfile({}: Props) {
   };
 
   return (
-    <div className="flex">
-      <div className="flex h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4">
-        <div className="mx-auto flex gap-2">
+    <div className="flex flex-col lg:flex-row">
+      <div className="hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex">
+        <div className="mx-auto flex flex-col items-center gap-2">
           <img
             src={`${backend_url}${user?.avatar}`}
             className="h-28 w-28 cursor-pointer rounded-full"
-            alt=""
+            alt={user?.name}
           />
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col items-center justify-center gap-4">
             <h1 className="text-lg font-bold text-white md:text-xl">
               {user?.name}
             </h1>
-            <div>
+            <div className="mx-auto">
               <input
                 type="file"
                 id="image"
@@ -118,7 +119,7 @@ function ShipperProfile({}: Props) {
           {List.map((list) => (
             <div
               onClick={() => setOption(list.id)}
-              className={`w-full cursor-pointer border-b border-[#2C2C2C] px-3 py-4 text-start uppercase transition-all duration-300 ${
+              className={`w-full cursor-pointer border-b border-[#2C2C2C] px-3 py-4 text-start uppercase transition-all duration-500 ${
                 option === list.id
                   ? "bg-[#DDB7AC] text-[#2C2C2C]"
                   : "text-white"
@@ -130,10 +131,90 @@ function ShipperProfile({}: Props) {
           ))}
         </div>
       </div>
-      <div className="grid basis-4/5 px-3 py-10">
+
+      <div className="block lg:hidden">
+        <h1
+          className={`flex w-full items-center justify-center bg-[#2C2C2C] px-3 py-3 text-center text-lg font-bold text-white sm:py-4 sm:text-xl ${
+            show ? "" : ""
+          }`}
+        >
+          <span
+            className=" flex cursor-pointer uppercase items-center justify-center gap-2 px-3 py-2"
+            onClick={() => setShow(!show)}
+          >
+            {option === "profile"
+              ? "My Profile"
+              : option === "shipper"
+              ? "shipper orders"
+              : "my order"}
+
+            <VscTriangleRight
+              className={`h-5 w-5 cursor-pointer text-white transition-all duration-300 sm:h-6 sm:w-6 ${
+                show ? "rotate-90" : ""
+              } `}
+            />
+          </span>
+        </h1>
+        <AnimatePresence>
+          {show && (
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className={` absolute z-10 w-full `}
+            >
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                onClick={() => {
+                  setOption("shipper");
+                  setShow(false);
+                }}
+                type="button"
+                className={`flex w-full items-center justify-center bg-[#2C2C2C] px-3 py-3 text-center text-base font-bold uppercase text-white transition-all duration-300 hover:text-white md:text-xl ${
+                  option === "shipper" ? "hidden" : ""
+                } `}
+              >
+                Shipper Orders
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
+                onClick={() => {
+                  setOption("profile");
+                  setShow(false);
+                }}
+                type="button"
+                className={`flex w-full items-center justify-center bg-[#2C2C2C] px-3 py-3 text-center text-base font-bold  uppercase text-white transition-all duration-300 hover:text-white md:text-xl ${
+                  option === "profile" ? "hidden" : ""
+                } `}
+              >
+                My profile
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => {
+                  setOption("order");
+                  setShow(false);
+                }}
+                type="button"
+                className={`flex w-full items-center justify-center  bg-[#2C2C2C] px-3 py-3 text-center text-base font-bold  uppercase text-white transition-all duration-300 hover:text-white md:text-xl ${
+                  option === "order" ? "hidden" : ""
+                }`}
+              >
+                My order
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="mx-auto flex lg:basis-4/5 w-full px-3 py-10 justify-center">
         <AnimatePresence>
           {option === "profile" ? (
-            <motion.div
+            <motion.div className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -142,7 +223,7 @@ function ShipperProfile({}: Props) {
               <Profile />
             </motion.div>
           ) : option === "order" ? (
-            <motion.div
+            <motion.div className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -151,7 +232,7 @@ function ShipperProfile({}: Props) {
               <Order />
             </motion.div>
           ) : (
-            <motion.div
+            <motion.div className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}

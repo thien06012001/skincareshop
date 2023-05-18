@@ -14,6 +14,7 @@ import axios from "axios";
 import { server } from "@/server";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
+import { VscTriangleRight } from "react-icons/vsc";
 type Props = {};
 type options = "profile" | "order";
 function CustomerProfile({}: Props) {
@@ -26,13 +27,13 @@ function CustomerProfile({}: Props) {
   const [avatar, setAvatar] = useState(null);
   const dispatch = useAppDispatch();
   const [option, setOption] = useState<options | string>("profile");
-
+  const [show, setShow] = useState(false);
   const logoutHandler = () => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
+        router.push("/loading");
         toast.success(res.data.message);
-        router.push('/loading')
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -48,7 +49,6 @@ function CustomerProfile({}: Props) {
       title: "my order",
     },
   ];
-
 
   const handleImage = async (e: any) => {
     const file = e.target.files[0];
@@ -75,26 +75,29 @@ function CustomerProfile({}: Props) {
   };
 
   return (
-    <div className="flex">
-      <div className="flex h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4">
-        <div className="mx-auto flex gap-2">
+    <div className="flex flex-col lg:flex-row">
+      <div className="hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex">
+        <div className="mx-auto flex flex-col items-center gap-2">
           <img
             src={`${backend_url}${user?.avatar}`}
             className="h-28 w-28 cursor-pointer rounded-full"
-            alt=""
+            alt={user?.name}
           />
           <div className="flex flex-col gap-4">
             <h1 className="text-lg font-bold text-white md:text-xl">
               {user?.name}
             </h1>
-            <div>
+            <div className="mx-auto">
               <input
                 type="file"
                 id="image"
                 className="hidden"
                 onChange={handleImage}
               />
-              <label htmlFor="image" className="flex w-fit items-center justify-center rounded border-2 border-white bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-white cursor-pointer">
+              <label
+                htmlFor="image"
+                className="flex w-fit cursor-pointer items-center justify-center rounded border-2 border-white bg-[#FAF7F68F]/50 px-4 py-1 text-sm text-white"
+              >
                 EDIT
               </label>
             </div>
@@ -123,10 +126,74 @@ function CustomerProfile({}: Props) {
           ))}
         </div>
       </div>
-      <div className="grid basis-4/5 px-3 py-10">
+
+      <div className="block lg:hidden">
+        <h1
+          className={`flex w-full items-center justify-center bg-[#2C2C2C] px-3 py-3 text-center text-lg font-bold text-white sm:py-4 sm:text-xl ${
+            show ? "" : ""
+          }`}
+        >
+          <span
+            className=" flex cursor-pointer items-center justify-center gap-2 px-3 py-2 uppercase"
+            onClick={() => setShow(!show)}
+          >
+            {option === "profile" ? "My Profile" : "my order"}
+
+            <VscTriangleRight
+              className={`h-5 w-5 cursor-pointer text-white transition-all duration-300 sm:h-6 sm:w-6 ${
+                show ? "rotate-90" : ""
+              } `}
+            />
+          </span>
+        </h1>
+        <AnimatePresence>
+          {show && (
+            <motion.div
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className={` absolute z-10 w-full `}
+            >
+             
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
+                onClick={() => {
+                  setOption("profile");
+                  setShow(false);
+                }}
+                type="button"
+                className={`flex w-full items-center justify-center bg-[#2C2C2C] px-3 py-3 text-center text-base font-bold  uppercase text-white transition-all duration-300 hover:text-white md:text-xl ${
+                  option === "profile" ? "hidden" : ""
+                } `}
+              >
+                My profile
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => {
+                  setOption("order");
+                  setShow(false);
+                }}
+                type="button"
+                className={`flex w-full items-center justify-center  bg-[#2C2C2C] px-3 py-3 text-center text-base font-bold  uppercase text-white transition-all duration-300 hover:text-white md:text-xl ${
+                  option === "order" ? "hidden" : ""
+                }`}
+              >
+                My order
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      <div className="mx-auto grid basis-4/5 px-3 py-10 w-full">
         <AnimatePresence>
           {option === "profile" ? (
             <motion.div
+              className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -136,6 +203,7 @@ function CustomerProfile({}: Props) {
             </motion.div>
           ) : (
             <motion.div
+              className="w-full"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               exit={{ opacity: 0 }}

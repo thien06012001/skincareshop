@@ -83,7 +83,7 @@ function Order({ }: Props) {
                         <div>
                           $
                           {data.cart.reduce(
-                            (total: number, item: any) => total + item.price,
+                            (total: number, item: any) => total + item.price*item.qty,
                             0
                           )}
                         </div>

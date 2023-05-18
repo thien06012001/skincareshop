@@ -1,34 +1,7 @@
-import product from "../app/assets/product.png";
 import banner1 from "../app/assets/banner1.png";
 import banner2 from "../app/assets/banner2.png";
 import banner3 from "../app/assets/banner3.png";
-export const products = [
-  {
-    image: product,
-    name: "Facial Wash",
-    price: "$10",
-  },
-  {
-    image: product,
-    name: "Facial Wash",
-    price: "$10",
-  },
-  {
-    image: product,
-    name: "Facial Wash",
-    price: "$10",
-  },
-  {
-    image: product,
-    name: "Facial Wash",
-    price: "$10",
-  },
-  {
-    image: product,
-    name: "Facial Wash",
-    price: "$10",
-  },
-];
+
 export const banners = [
   {
     id: 1,
@@ -71,7 +44,7 @@ export const statusStatic = [
     value: "Delivered"
   },
   {
-    id: 1,
+    id: 3,
     value: "Canceled"
   },
 ]

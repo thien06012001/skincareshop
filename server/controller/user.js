@@ -105,14 +105,6 @@ router.post("/create-customer", upload.single("file"), async (req, res, next) =>
       return next(new ErrorHandler(error.message, 500));
     }
 
-    // const newUser = await User.create(user);
-    // res.status(200).json({
-    //   success: true,
-    //   newUser,
-    //   message: 'Register successfully'
-    // })
-    
-    // console.log(user)
   } catch (error) {
     console.log(error.message)
     return next(new ErrorHandler(error.message, 400));

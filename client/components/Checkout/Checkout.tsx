@@ -177,7 +177,6 @@ const ShippingInfo = ({
           />
         </div>
         <div className="flex flex-col gap-1">
-         
           <input
             type="text"
             name="Address"
@@ -263,7 +262,10 @@ const ShippingInfo = ({
               onChange={(e) => setHub(e.target.value)}
               id=""
             >
-              <option className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold">
+              <option
+                value=""
+                className="border-2 border-[#BBA999] bg-[#F0E4DB] font-semibold"
+              >
                 Distribution Hub
               </option>
               {hubs.map((hub) => (

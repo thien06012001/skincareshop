@@ -93,7 +93,7 @@ function CartList({ setShow }: any) {
                         </div>
                         <img
                           src={`${backend_url}${i.image}`}
-                          alt=""
+                          alt={i.name}
                           className="ml-2 mr-2 h-min w-[130px] rounded-[5px]"
                         />
                         <div className="pl-[5px]">

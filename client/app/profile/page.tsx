@@ -22,9 +22,9 @@ function ProfilePage({}: Props) {
         router.push('/account');
       }
     };
+   timeoutId = setTimeout(checkUser, 2000);
   
-    timeoutId = setTimeout(checkUser, 2000);
-  
+   
     return () => {
       clearTimeout(timeoutId);
     };

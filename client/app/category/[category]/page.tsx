@@ -23,17 +23,17 @@ function CategoryPage({ params: { category } }: Props) {
   const [show, setShow] = useState(false);
   const { cart } = useSelector((state: any) => state.cart);
   const [isSort, setIsSort] = useState(false);
-  const [min, setMin] = useState("MIN");
-  const [max, setMax] = useState("MAX");
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(0);
   const dispatch = useAppDispatch();
-  console.log(min);
+  console.log(parseInt("3"));
   const sort = () => {
-    if (min === "MIN" || max === "MAX") {
-      toast.error("Min and Max must be a number");
+    if (min < 0) {
+      toast.error("Min value can not be smaller than zero!");
       return;
     }
-    if (parseInt(min) >= parseInt(max)) {
-      toast.error("Min value must be smaller than Max value");
+    if (min >= max) {
+      toast.error("Min value must be smaller than Max value!");
       return;
     }
     setIsSort(true);
@@ -52,7 +52,6 @@ function CategoryPage({ params: { category } }: Props) {
 
   return (
     <>
-      <h1></h1>
       <div className="flex h-screen justify-center py-5">
         <div className="mx-auto flex basis-1/6 flex-col items-center">
           <div className="flex items-center gap-2 p-3 text-xl font-bold text-[#55564E]">
@@ -60,23 +59,16 @@ function CategoryPage({ params: { category } }: Props) {
           </div>
 
           <div className="mt-6 flex flex-col space-y-3">
-            <div className="flex items-center justify-center gap-2">
-              <div className="flex basis-1/3 items-center justify-center rounded border border-[#55564E] px-3 py-1 text-sm text-[#55564E]">
-                <select
+            <div className="flex w-full items-center justify-center gap-2">
+              <div className="flex w-[40%] items-center justify-center text-sm text-[#55564E]">
+                <label className="w-[20%] mr-auto" htmlFor="min">Min</label>
+                <input
+                  className="rounded w-[70%] pl-1 border border-[#55564E] bg-transparent outline-none"
+                  type="number"
                   value={min}
-                  name="min"
-                  onChange={(e) => setMin(e.target.value)}
-                  autoComplete="min"
-                  id=""
-                  className="bg-transparent outline-none"
-                >
-                  <option value="Min">Min</option>
-                  <option value="0">0</option>
-                  <option value="10">10</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                  <option value="150">150</option>
-                </select>
+                  id="min"
+                  onChange={(e) => setMin(parseInt(e.target.value))}
+                />
               </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +76,7 @@ function CategoryPage({ params: { category } }: Props) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-6 w-[5%]"
               >
                 <path
                   strokeLinecap="round"
@@ -92,20 +84,16 @@ function CategoryPage({ params: { category } }: Props) {
                   d="M19.5 12h-15"
                 />
               </svg>
-              <div className="flex items-center justify-center rounded border border-[#55564E] px-3 py-1 text-sm text-[#55564E]">
-                <select
+              <div className="flex w-[40%] items-center justify-between text-sm text-[#55564E]">
+                <label className="w-[20%]" htmlFor="max">Max</label>
+                <input
+                  className="w-[70%] pl-1 rounded border border-[#55564E] bg-transparent outline-none"
+                  type="number"
+                  placeholder="Max Value"
                   value={max}
-                  onChange={(e) => setMax(e.target.value)}
-                  name=""
-                  id=""
-                  className="bg-transparent outline-none"
-                >
-                  <option value="MAX">MAX</option>
-                  <option value="10">10</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                  <option value="150">150</option>
-                </select>
+                  id="max"
+                  onChange={(e) => setMax(parseInt(e.target.value))}
+                />
               </div>
             </div>
             <button
@@ -144,7 +132,7 @@ function CategoryPage({ params: { category } }: Props) {
                       <Link href={`/product/${product._id}`}>
                         <img
                           src={`${backend_url}${product.image}`}
-                          alt=""
+                          alt={product.name}
                           className="h-[20rem] w-full "
                         />
                       </Link>
@@ -168,7 +156,7 @@ function CategoryPage({ params: { category } }: Props) {
                       <Link href={`/product/${product._id}`}>
                         <img
                           src={`${backend_url}${product.image}`}
-                          alt=""
+                          alt={product.name}
                           className="h-[20rem] w-full "
                         />
                       </Link>

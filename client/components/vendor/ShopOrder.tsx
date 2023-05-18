@@ -6,9 +6,9 @@ function ShopOrder({}: Props) {
   const { shopOrders } = useSelector((state: any) => state.order);
   const list = ["Status", "Product Name", "Unit Price", "Amount", "Price"];
   return (
-    <div className="">
-      <div className="my-4 flex flex-col gap-4 space-y-4 bg-[#F0E4DB] text-[#2C2C2CBF]">
-        <div className="flex flex-col">
+    <div className="min-h-screen">
+      <div className="my-4 flex flex-col gap-4 space-y-4  text-[#2C2C2CBF]">
+        <div className="flex flex-col gap-4">
           {shopOrders &&
             shopOrders.map((data: any) => (
               <div
@@ -78,7 +78,7 @@ function ShopOrder({}: Props) {
                         <div>
                           $
                           {data.cart.reduce(
-                            (total: number, item: any) => total + item.price,
+                            (total: number, item: any) => total + item.price*item.qty,
                             0
                           )}
                         </div>

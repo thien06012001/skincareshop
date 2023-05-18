@@ -99,7 +99,7 @@ function ProductDetailPage({ params: { id } }: Props) {
             <div className="grid grid-cols-2">
               <img
                 src={`${backend_url}${data.image}`}
-                alt=""
+                alt={data.name}
                 className="mx-auto h-[25rem] w-[80%] object-fill"
               />
 

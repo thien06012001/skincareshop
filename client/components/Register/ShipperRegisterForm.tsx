@@ -9,6 +9,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { VscTriangleRight } from "react-icons/vsc";
 import { motion, AnimatePresence } from "framer-motion";
 import { hubs } from "@/static/data";
+import { useRouter } from "next/navigation";
 type Props = {};
 type location = "Ho Chi Minh" | "Hue" | "Ha Noi";
 function ShipperRegisterForm({}: Props) {
@@ -22,7 +23,7 @@ function ShipperRegisterForm({}: Props) {
   const [hub, setHub] = useState("");
   const [show, setShow] = useState(false);
   const buttonList = ["Ha Noi", "Quang Tri", "Ba Ria-Vung Tau", " Ho Chi Minh"];
-
+  const router = useRouter();
   const role = "shipper";
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -50,7 +51,12 @@ function ShipperRegisterForm({}: Props) {
       setIsLoading(false);
       return;
     }
+    if (hub === "") {
+      setIsLoading(false);
+      toast.error("Please choose you distribution hub");
 
+      return;
+    }
     const config = { headers: { "Content-Type": "multipart/form-data" } };
     const newForm = new FormData();
 
@@ -71,6 +77,7 @@ function ShipperRegisterForm({}: Props) {
         setPassword("");
         setAvatar(null);
         setHub("Ho Chi Minh");
+        router.push("account");
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -163,7 +170,7 @@ function ShipperRegisterForm({}: Props) {
               name="hub"
               autoComplete="hub"
               placeholder="Choose Location"
-              required
+              // required
               value={hub}
               onChange={(e) => setHub(e.target.value)}
               className="w-full border-b-2 border-[#55564E] bg-transparent px-3 py-2 placeholder:tracking-wider placeholder:text-[#55564E] focus:bg-transparent focus:outline-none"

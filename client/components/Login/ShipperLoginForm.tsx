@@ -27,8 +27,8 @@ function ShipperLoginForm({}: Props) {
         { withCredentials: true }
       )
       .then((res) => {
-        toast.success("Login Success!");
         navigate.push(`/dashboard/shipper`);
+        toast.success("Login Success!");
       })
       .catch((err) => {
         toast.error(err.response.data.message);

@@ -7,7 +7,7 @@ import { updateShipperInformation } from "@/redux/actions/user";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
+import { motion } from "framer-motion";
 type Props = {};
 
 function Profile({}: Props) {
@@ -47,19 +47,24 @@ function Profile({}: Props) {
     setShow(false);
   };
   return (
-    <div className="m-auto w-[60%] bg-[#F0E4DB] px-4 py-3 text-[#2C2C2C]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      whileInView={{ opacity: 1 }}
+      className="m-auto w-full bg-[#F0E4DB] px-4 py-3 text-[#2C2C2C]"
+    >
       <h1 className="text-xl font-bold">MY PROFILE</h1>
       <form
         onSubmit={handleSubmit}
-        className="relative flex flex-col space-y-3 px-4 py-2"
+        className="relative flex flex-col space-y-3 px-4 py-2 "
       >
-        <div className="relative border-b border-[#BBA999] py-2">
+        <div className="relative px-3 border-b border-[#BBA999] py-2">
           <h1>{user?.name}</h1>
         </div>
-        <div className="relative border-b border-[#BBA999] py-2">
+        <div className="relative px-3 border-b border-[#BBA999] py-2">
           <h1>{user?.email}</h1>
         </div>
-        <div className="relative border-b border-[#BBA999] py-2">
+        <div className="relative px-3 border-b border-[#BBA999] py-2">
           {changePhone ? (
             <h1>
               +84{" "}
@@ -176,7 +181,7 @@ function Profile({}: Props) {
           SAVE
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

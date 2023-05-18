@@ -3,6 +3,7 @@
 import { useAppDispatch } from "@/redux/hook";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 type Props = {};
 
@@ -13,14 +14,16 @@ function Order({}: Props) {
 
   return (
     <div className="">
-      <div className="my-4 flex flex-col gap-4 space-y-4 text-[#2C2C2CBF]">
-        
+      <div className="my-4 flex flex-col gap-4 space-y-4 text-[#2C2C2CBF] min-h-screen">
         <div className="flex flex-col">
           {orders &&
             orders.map((data: any) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                whileInView={{ opacity: 1 }}
                 key={data._id}
-                className=" bg-[#F0E4DB] p-5 mb-5 text-[#2C2C2CBF]"
+                className=" mb-5 bg-[#F0E4DB] p-5 text-[#2C2C2CBF]"
               >
                 <div className="p-5">
                   <h1 className="mb-4 text-xl font-bold text-[#2C2C2C]">
@@ -36,11 +39,11 @@ function Order({}: Props) {
                 </div>
                 <hr className="border border-[#BBA999]" />
                 <div
-                  className="mx-auto  grid grid-cols-5 items-center justify-between text-center"
+                  className="mx-auto px-5 grid grid-cols-5 items-center justify-between text-center"
                   key={data._id}
                 >
                   <div
-                    className={`"w-full ${
+                    className={`"w-full  ${
                       data.status === "Active"
                         ? "text-green-500"
                         : data.status === "Canceled"
@@ -72,10 +75,10 @@ function Order({}: Props) {
                     ))}
                   </div>
                 </div>
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-end px-5">
                   <hr className="my-6 w-[60%] border border-black" />
                 </div>
-                <div className="flex items-center justify-end gap-4 font-bold text-black">
+                <div className="flex items-center justify-end gap-4 px-5 font-bold text-black">
                   <div className="flex w-[60%] items-center text-center ">
                     <span className="basis-1/3">Total</span>
                     <div className="basis-1/3" />
@@ -84,7 +87,7 @@ function Order({}: Props) {
                         <div>
                           $
                           {data.cart.reduce(
-                            (total: number, item: any) => total + item.price,
+                            (total: number, item: any) => total + item.price*item.qty,
                             0
                           )}
                         </div>
@@ -92,7 +95,7 @@ function Order({}: Props) {
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
         </div>
       </div>

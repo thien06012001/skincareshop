@@ -26,7 +26,7 @@ function SearchBar({}: Props) {
     // setActive(false);
   });
   return (
-    <form className="relative">
+    <form className="relative w-[30%]">
     
       <input
         value={searchTerm}
@@ -34,7 +34,7 @@ function SearchBar({}: Props) {
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
         type="text"
-        className="border-b-2 border-[#BBA999] bg-transparent py-2 placeholder:text-[#BBA9998C] focus:outline-none"
+        className="border-b-2 w-full border-[#FAF7F6] bg-transparent py-2 text-[#FAF7F6] placeholder:text-[#FAF7F6] focus:outline-none"
         placeholder="Search"
       />
       <svg
@@ -43,7 +43,7 @@ function SearchBar({}: Props) {
         viewBox="0 0 24 24"
         strokeWidth={2}
         stroke="currentColor"
-        className="absolute right-2 top-1 h-8 w-8 cursor-pointer text-[#BBA999]"
+        className="absolute right-2 top-2 h-6 w-6 cursor-pointer text-[#FAF7F6]"
       >
         <path
           strokeLinecap="round"
@@ -54,16 +54,13 @@ function SearchBar({}: Props) {
       {searchData && searchTerm !== "" && active === true ? (
         <div className="absolute left-0 z-10 w-full bg-[#fff] p-3 shadow">
           {searchData.map((i: any) => {
-            const d = i.name;
-
-            const Product_name = d.replace(/\s+/g, "-");
             return (
               <Link key={i._id} href={`/product/${i._id}`}>
                 <div className="flex items-center">
                   <img
                     src={`${backend_url}${i.image}`}
-                    alt=""
-                    className="mr-2 w-[50px]"
+                    alt={i.name}
+                    className="mr-2 w-[30%]"
                   />
                   <h5>{i.name}</h5>
                   

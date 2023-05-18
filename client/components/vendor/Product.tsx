@@ -15,11 +15,13 @@ function Product({}: Props) {
   );
   const list = ["Product Image", "Product Name", "Price", "Category", "Review"];
   return (
-    <main>
+    <main className="min-h-screen">
       <ul className="mb-2 grid grid-cols-5 items-center justify-between">
-      {list.map((list: any) => (
-        <li key={list} className="mx-auto text-[#2C2C2CBF] font-bold">{list}</li>
-      ))}
+        {list.map((list: any) => (
+          <li key={list} className="mx-auto font-bold text-[#2C2C2CBF]">
+            {list}
+          </li>
+        ))}
       </ul>
       <hr className="my-3 w-full border border-[#BBA999]" />
       {shopProduct !== null ? (

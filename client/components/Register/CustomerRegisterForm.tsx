@@ -6,6 +6,7 @@ import { FaUserCircle } from "react-icons/fa";
 import axios from "axios";
 import { server } from "../../server";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 type Props = {};
 
 function CustomerRegisterForm({}: Props) {
@@ -16,7 +17,7 @@ function CustomerRegisterForm({}: Props) {
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const router = useRouter();
   const role = "customer";
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
@@ -59,12 +60,13 @@ function CustomerRegisterForm({}: Props) {
     axios
       .post(`${server}/user/create-customer`, newForm, config)
       .then((res) => {
-        toast.success(res.data.message);
         setName("");
         setEmail("");
         setPassword("");
         setAddress("");
         setAvatar(null);
+        router.push("/account");
+        toast.success(res.data.message);
       })
       .catch((error) => {
         toast.error(error.response.data.message);

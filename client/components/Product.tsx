@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { types, products } from "@/static/data";
+import { types } from "@/static/data";
 import Image from "next/image";
 import ProductCarousel from "./ProductCarousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -43,11 +43,11 @@ function Product({}: Props) {
     <div className="flex flex-col items-center justify-center space-y-5 divide-y-2 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
       {types.map((type) => (
         <div
-          className="flex  w-full flex-col items-center justify-center gap-10 space-y-3"
+          className="flex h-1/5 w-full flex-col items-center justify-center gap-10 space-y-3"
           key={type}
         >
           {type}
-          <div className=" flex w-full items-center justify-between px-4 py-2">
+          <div className=" flex flex-wrap w-full items-center justify-around px-4 py-2">
             {allProducts !== undefined &&
               allProducts.length !== 0 &&
               allProducts.slice(0, 3) &&
@@ -57,13 +57,13 @@ function Product({}: Props) {
                   <>
                     <div
                       key={product._id}
-                      className="mx-auto hidden basis-1/4  flex-col px-3 py-2 md:flex"
+                      className="mx-auto hidden basis-1/5 flex-col px-3 py-2 md:flex"
                     >
-                      <div className="relative mx-auto flex w-fit items-center justify-center  ">
+                      <div className="relative w-[50%] mx-auto flex items-center justify-center  ">
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
-                          className="mx-auto h-[10rem] w-[13rem] object-fill"
+                          className="mx-auto h-[10rem] w-full object-fill"
                         />
                         <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
                           <div className="flex basis-4/5 items-center justify-center gap-2">
@@ -133,9 +133,7 @@ function Product({}: Props) {
                         <img
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
-                          width={160}
-                          height={160}
-                          className="mx-auto w-[10rem] h-[10rem] object-fill"
+                          className="mx-auto w-full h-[10rem] object-fill"
                         />
                         <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
                           <div className="flex basis-4/5 items-center justify-center gap-2">
@@ -177,9 +175,9 @@ function Product({}: Props) {
                           </Link>
                         </div>
                       </div>
-                      <div className="mx-auto flex w-[15rem] flex-col space-y-2 px-4 py-2 font-medium text-[#55564E]">
-                        <h1>{product.name}</h1>
-                        <p>${product.price}</p>
+                      <div className="mx-auto flex w-[15rem] justify-center flex-col space-y-2 px-4 py-2 items-center font-medium text-[#55564E]">
+                        <h1 className="flex items-center justify-center">{product.name}</h1>
+                        <p className="flex items-center justify-center text-center">${product.price}</p>
                       </div>
                     </div>
                   ))}

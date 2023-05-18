@@ -19,7 +19,7 @@ function CustomerLoginForm({}: Props) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-  
+
     await axios
       .post(
         `${server}/user/login-customer`,
@@ -30,8 +30,8 @@ function CustomerLoginForm({}: Props) {
         { withCredentials: true }
       )
       .then((res) => {
+        navigate.push("/");
         toast.success("Login Success!");
-        navigate.push('/')
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -44,7 +44,7 @@ function CustomerLoginForm({}: Props) {
       className="flex flex-col items-center justify-around gap-5"
     >
       <input
-        className="bg-transparent border-b-2 border-b-[#55564E] px-5 py-3 placeholder:text-[#55564E] placeholder:font-medium text-base sm:text-lg md:text-xl focus:outline-none"
+        className="border-b-2 border-b-[#55564E] bg-transparent px-5 py-3 text-base placeholder:font-medium placeholder:text-[#55564E] focus:outline-none sm:text-lg md:text-xl"
         type="text"
         name=""
         placeholder="Username"
@@ -55,32 +55,32 @@ function CustomerLoginForm({}: Props) {
         onChange={(e) => setName(e.target.value)}
       />
       <div className="relative">
-      <input
-        className="bg-transparent border-b-2 border-b-[#55564E] px-5 py-2 placeholder:text-[#55564E] placeholder:font-medium text-base sm:text-lg md:text-xl focus:outline-none"
-        type={visible ? 'text' : 'password'}
-        placeholder="Password"
-        autoComplete="current-password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        <input
+          className="border-b-2 border-b-[#55564E] bg-transparent px-5 py-2 text-base placeholder:font-medium placeholder:text-[#55564E] focus:outline-none sm:text-lg md:text-xl"
+          type={visible ? "text" : "password"}
+          placeholder="Password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         {visible ? (
-              <AiOutlineEye
-                className="absolute right-2 top-2 cursor-pointer text-[#55564E]"
-                size={25}
-                onClick={() => setVisible(false)}
-              />
-            ) : (
-              <AiOutlineEyeInvisible
-                className="absolute right-2 top-2 cursor-pointer text-[#55564E]"
-                size={25}
-                onClick={() => setVisible(true)}
-              />
-            )}
+          <AiOutlineEye
+            className="absolute right-2 top-2 cursor-pointer text-[#55564E]"
+            size={25}
+            onClick={() => setVisible(false)}
+          />
+        ) : (
+          <AiOutlineEyeInvisible
+            className="absolute right-2 top-2 cursor-pointer text-[#55564E]"
+            size={25}
+            onClick={() => setVisible(true)}
+          />
+        )}
       </div>
       <button
         disabled={isLoading}
-        className={`font-bold text-xl md:text-2xl transition-all duration-300 bg-transparent lg:text-3xl mt-5 px-5 py-2 text-[#55564E] ${
+        className={`mt-5 bg-transparent px-5 py-2 text-xl font-bold text-[#55564E] transition-all duration-300 md:text-2xl lg:text-3xl ${
           isLoading ? "" : "btn-effect"
         }`}
         type="submit"
@@ -89,7 +89,7 @@ function CustomerLoginForm({}: Props) {
           <div className="flex items-center justify-center" role="status">
             <svg
               aria-hidden="true"
-              className="w-12 h-12 mr-2 text-gray-200 animate-spin fill-[#55564E] mx-auto"
+              className="mx-auto mr-2 h-12 w-12 animate-spin fill-[#55564E] text-gray-200"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
