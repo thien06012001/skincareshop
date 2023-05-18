@@ -65,7 +65,7 @@ function CheckoutPage({}: Props) {
   };
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       {cart !== undefined && cart && cart.length === 0 ? (
         <h5>Cart Items is empty!</h5>
       ) : (

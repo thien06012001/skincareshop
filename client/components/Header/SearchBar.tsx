@@ -4,8 +4,9 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { backend_url } from "@/server";
+import { Quicksand } from "next/font/google";
 type Props = {};
-
+const quicksand = Quicksand({subsets:['latin']})
 function SearchBar({}: Props) {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState<any>(null);
@@ -34,7 +35,7 @@ function SearchBar({}: Props) {
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
         type="text"
-        className="border-b-2 w-full border-[#FAF7F6] bg-transparent py-2 text-[#FAF7F6] placeholder:text-[#FAF7F6] focus:outline-none"
+        className={`"border-b-2 ${quicksand.className} w-full border-[#FAF7F6] bg-transparent py-2 text-[#FAF7F6] placeholder:text-[#FAF7F6] focus:outline-none"`}
         placeholder="Search"
       />
       <svg

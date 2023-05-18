@@ -16,7 +16,9 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hook";
 import ShipperOrder from "./ShipperOrder";
 import { VscTriangleRight } from "react-icons/vsc";
+import { Quicksand } from "next/font/google";
 type Props = {};
+const quicksand = Quicksand({subsets:['latin']})
 type options = "profile" | "order" | "shipper";
 function ShipperProfile({}: Props) {
   const router = useRouter();
@@ -81,7 +83,7 @@ function ShipperProfile({}: Props) {
 
   return (
     <div className="flex flex-col lg:flex-row">
-      <div className="hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex">
+      <div className={`"${quicksand.className} hidden h-auto min-h-screen basis-1/5 flex-col items-center gap-5 bg-[#2C2C2C] py-4 lg:flex"`}>
         <div className="mx-auto flex flex-col items-center gap-2">
           <img
             src={`${backend_url}${user?.avatar}`}
@@ -160,7 +162,7 @@ function ShipperProfile({}: Props) {
             <motion.div
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className={` absolute z-10 w-full `}
+              className={` absolute z-10 w-full ${quicksand.className} `}
             >
               <motion.button
                 initial={{ opacity: 0 }}
@@ -211,7 +213,7 @@ function ShipperProfile({}: Props) {
         </AnimatePresence>
       </div>
 
-      <div className="mx-auto flex lg:hidden flex-col items-center mt-4">
+      <div className={`"mx-auto flex lg:hidden flex-col items-center mt-4 ${quicksand.className}"`}>
           <img
             src={`${backend_url}${user?.avatar}`}
             className="h-28 w-28 cursor-pointer rounded-full"

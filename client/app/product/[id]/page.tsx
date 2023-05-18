@@ -10,13 +10,13 @@ import { useAppDispatch } from "@/redux/hook";
 import { addTocart } from "@/redux/actions/cart";
 import { toast } from "react-toastify";
 import Link from "next/link";
-
+import { Montserrat,Quicksand } from 'next/font/google';
 type Props = {
   params: {
     id: any;
   };
 };
-
+const quicksand = Quicksand({subsets:['latin']})
 function ProductDetailPage({ params: { id } }: Props) {
   const { allProducts } = useSelector((state: any) => state.products);
   const { cart } = useSelector((state: any) => state.cart);
@@ -25,6 +25,7 @@ function ProductDetailPage({ params: { id } }: Props) {
   const [data, setData] = useState<any>();
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
+  // const montserrat =  Montserrat({ subsets: ['latin'] });
   const incrementCount = () => {
     setCount(count + 1);
   };
@@ -49,11 +50,11 @@ function ProductDetailPage({ params: { id } }: Props) {
     setData(product);
   });
   return (
-    <div className="py-4">
+    <div className='py-4 font-mono'>
       {data && data !== undefined && (
         <>
-          <div className="flex gap-2 text-sm items-center p-5">
-            <Link href='/' className="flex items-center gap-1 text-base">
+          <div className="flex items-center gap-2 p-5 text-sm">
+            <Link href="/" className="flex items-center gap-1 text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -64,19 +65,19 @@ function ProductDetailPage({ params: { id } }: Props) {
                 <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
               </svg>{" "}
               Home
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-4 w-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </Link>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z"
-                clipRule="evenodd"
-              />
-            </svg>
 
             <span className="text-base font-normal">
               <Link href={`/category/${data.category}`}>{data.category}</Link>
@@ -100,7 +101,7 @@ function ProductDetailPage({ params: { id } }: Props) {
               <img
                 src={`${backend_url}${data.image}`}
                 alt={data.name}
-                className="mx-auto h-[10rem] sm:h-[15rem] md:h-[25rem]  w-[80%] object-fill"
+                className="mx-auto h-[10rem] w-[80%] object-fill  sm:h-[15rem] md:h-[25rem]"
               />
 
               <div className="mx-auto flex w-[80%] flex-col justify-between">
@@ -120,9 +121,9 @@ function ProductDetailPage({ params: { id } }: Props) {
                     <h1 className="text-lg font-bold md:text-xl lg:text-2xl">
                       DESCRIPTION
                     </h1>
-                    <p>{data.description}</p>
+                    <p className={quicksand.className}>{data.description}</p>
                   </div>
-                  <div className="hidden lg:flex select-none flex-col gap-4">
+                  <div className="hidden select-none flex-col gap-4 lg:flex">
                     <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
                       <HiOutlineMinus
                         className="cursor-pointer"
@@ -136,7 +137,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                     </div>
                     <button
                       onClick={() => addToCartHandler(data._id)}
-                      className="flex items-center justify-center bg-[#BBA999] p-4 py-2 text-sm "
+                      className="flex text-[#FAF7F6] items-center justify-center bg-[#BBA999] p-4 py-2 text-sm "
                     >
                       Add to cart
                     </button>
@@ -166,7 +167,7 @@ function ProductDetailPage({ params: { id } }: Props) {
                       initial={{ height: 0, opacity: 0 }}
                       whileInView={{ height: 1, scaleY: 1, opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 "
+                      className={`${quicksand.className} min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 `}
                     >
                       {data.applicationMode}
                     </motion.div>
@@ -194,32 +195,29 @@ function ProductDetailPage({ params: { id } }: Props) {
                       initial={{ height: 0, opacity: 0 }}
                       whileInView={{ height: 1, scaleY: 1, opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 "
+                      className={`min-h-[4rem] w-full bg-[#F0E4DB80] px-3 py-2 ${quicksand.className} `}
                     >
                       {data.ingredients}
                     </motion.div>
                   ) : null}
                 </AnimatePresence>
               </div>
-              <div className="flex lg:hidden w-[80%] mx-auto select-none flex-col gap-4 pt-3">
-                    <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
-                      <HiOutlineMinus
-                        className="cursor-pointer"
-                        onClick={decrementCount}
-                      />
-                      {count}
-                      <HiPlus
-                        onClick={incrementCount}
-                        className="cursor-pointer"
-                      />
-                    </div>
-                    <button
-                      onClick={() => addToCartHandler(data._id)}
-                      className="flex items-center justify-center bg-[#BBA999] p-4 py-2 text-sm "
-                    >
-                      Add to cart
-                    </button>
-                  </div>
+              <div className="mx-auto flex w-[80%] select-none flex-col gap-4 pt-3 lg:hidden">
+                <div className="mx-auto flex  w-fit items-center gap-2 border border-[#BBA999] bg-white p-3 py-1 font-medium text-[#BBA999]">
+                  <HiOutlineMinus
+                    className="cursor-pointer"
+                    onClick={decrementCount}
+                  />
+                  {count}
+                  <HiPlus onClick={incrementCount} className="cursor-pointer" />
+                </div>
+                <button
+                  onClick={() => addToCartHandler(data._id)}
+                  className="flex items-center justify-center bg-[#BBA999] p-4 py-2 text-sm "
+                >
+                  Add to cart
+                </button>
+              </div>
             </div>
           </div>
         </>

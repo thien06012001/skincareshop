@@ -40,10 +40,10 @@ function Product({}: Props) {
     }
   };
   return (
-    <div className="flex flex-col divide-y-2 items-center justify-center space-y-5 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
+    <div className="flex flex-col divide-y-2 items-center justify-center space-y-5 m-0 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
       {types.map((type) => (
         <div
-          className="flex h-fit w-full flex-col items-center justify-around md:justify-around p-10"
+          className="flex h-fit w-full flex-col items-center justify-around md:justify-around p-10 m-0"
           key={type}
         >
           <div className="pb-10">{type}</div>
@@ -57,7 +57,7 @@ function Product({}: Props) {
                 .map((product: any) => (
                   <div
                     key={product._id}
-                    className="mx-auto hidden h-full basis-1/3 flex-col md:flex"
+                    className="mx-auto hidden h-full basis-1/3 flex-col md:flex m-0"
                   >
                     <div className="relative mx-auto flex h-fit w-fit items-center justify-center  ">
                       <Image
