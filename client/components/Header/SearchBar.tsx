@@ -57,28 +57,12 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full bg-[#fff] shadow">
-          {/* <button className="w-full flex justify-end items-center p-3" onClick={() => setActive(false)}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button> */}
+        <div className="absolute left-0 z-10 w-full bg-[#fff] shadow overflow-y-auto">
           {searchData &&
             searchData.map((i: any) => {
               return (
                 <Link
-                  className="flex items-center justify-around"
+                  className="flex flex-col md:flex-row items-center justify-around"
                   key={i._id}
                   href={`/product/${i._id}`}
                 >
@@ -87,7 +71,7 @@ function SearchBar({}: Props) {
                     alt={i.name}
                     className="mr-2 h-[100px] w-[100px] object-fill"
                   />
-                  <h5 className="w-full h-full">{i.name}</h5>
+                  <h5 className="w-full h-full line-clamp-2">{i.name}</h5>
                 </Link>
               );
             })}
