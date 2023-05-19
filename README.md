@@ -29,8 +29,26 @@ nodemon index.js
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 The server will run on [http://localhost:9000](http://localhost:9000)
 You can start editing the page by modifying `client/app/page.tsx` `client/app/[folder]/page.tsx`. The page auto-updates as you edit the file.
+## Account
+Vendor
+```bash
+username: bach2002
+password: BachDa06012001#
 
+```
+Customer
 
+```bash
+username: phongchau0911
+password: BachDa06012001#
+
+```
+Shipper
+```bash
+username: bang070112004
+password: BachDa06012001#
+
+```
 ## Using you own stuff
 You can use your own database by replacing the DB_URL with your own mongodb url.
 And you can change the SMPT_MAIL with your own email and SMPT_PASSWORD with your own application password of Google account
