@@ -5,10 +5,11 @@ import Product from "@/components/Product";
 import Collection from "@/components/Collection";
 type Props = {};
 
-function HomePage({}: Props) {
+function HomePage({ }: Props) {
   return (
     
-      <main>
+    <main>
+      
         <HomePageCarousel />
 
         <Product />

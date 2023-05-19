@@ -5,7 +5,7 @@ export const addToWishlist = (data:any) => async (dispatch:any, getState:any) =>
       type: "addToWishlist",
       payload: data,
     });
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     localStorage.setItem("wishlistItems", JSON.stringify(getState().wishlist.wishlist));
 
     }
@@ -18,7 +18,7 @@ export const addToWishlist = (data:any) => async (dispatch:any, getState:any) =>
       type: "removeFromWishlist",
       payload: data._id,
     });
-    if(typeof window !== undefined) {
+    if(typeof window !== 'undefined') {
       localStorage.setItem("wishlistItems", JSON.stringify(getState().wishlist.wishlist));
 
     }

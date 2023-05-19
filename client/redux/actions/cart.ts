@@ -4,7 +4,7 @@ export const addTocart = (data: any) => async (dispatch: any, getState: any) => 
     type: "addToCart",
     payload: data,
   });
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
 
   }
@@ -17,7 +17,7 @@ export const removeFromCart = (data: any) => async (dispatch: any, getState: any
     type: "removeFromCart",
     payload: data._id,
   });
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
 
   }

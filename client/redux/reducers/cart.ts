@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 interface CartState {
   cart: any
-
+  storage: any
 }
 // const storedCartItems = localStorage.getItem("cartItems")
 // // const initialState = {
@@ -23,9 +23,13 @@ interface CartState {
 //     cart: <any>[],
 //   };
 // }
+let storage = ''
+if (typeof window !== "undefined") {
+  storage = localStorage?.getItem("cartItems") || ""
+}
 const initialState = {
-  cart: localStorage.getItem("cartItems")
-    ? JSON.parse(String(localStorage.getItem("cartItems")))
+  cart: storage
+    ? JSON.parse(String(storage))
     : [],
 };
 

@@ -23,7 +23,6 @@ function SearchBar({}: Props) {
       );
     setSearchData(filteredProducts);
   };
-  console.log(active);
   return (
     <form
       // tabIndex={0}
