@@ -10,14 +10,14 @@ function List({}: Props) {
   const list = ["All", "Face", "Body", "Hair", "Makeup"];
   const params = useParams()
   return (
-    <ul className={`font-medium md:flex hidden w-[40%] items-center justify-around gap-4 bg-[#BBA999] text-[#FAF7F6] ${quicksand.className}`}>
+    <div className={`font-medium md:flex hidden w-[40%] items-center justify-around gap-4 bg-[#BBA999] text-[#FAF7F6] ${quicksand.className}`}>
       {list.map((list) => (
         <Link className="group flex flex-col justify-center items-center md:w-fit" href={`/Products/${list}`} key={list}>
           {list}
           <div className={`h-[2px]  bg-[#FAF7F6] transition-all duration-300 ${params.category === list ?'w-full' :'w-0 group-hover:w-full'}`} />
         </Link>
       ))}
-    </ul>
+    </div>
   );
 }
 

@@ -57,13 +57,13 @@ function Footer({}: Props) {
               )}
             </span>
           </h1>
-          <ul className="hidden flex-col gap-1 text-sm font-light md:flex">
+          <div className="hidden flex-col gap-1 text-sm font-light md:flex">
             {list.map((list) => (
               <Link href={`/Products/${list}`} key={list}>
                 {list}
               </Link>
             ))}
-          </ul>
+          </div>
           <AnimatePresence>
             {show && (
               <motion.ul
