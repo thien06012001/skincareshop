@@ -14,7 +14,7 @@ import { addTocart } from "@/redux/actions/cart";
 import { addToBasket, selectItems } from "@/redux/slices/basketSlice";
 type Props = {};
 
-  function Product({}: Props) {
+function Product({}: Props) {
   const { allProducts } = useSelector((state: any) => state.products);
   const items = useSelector(selectItems);
   const { cart } = useSelector((state: any) => state.cart);
@@ -31,24 +31,26 @@ type Props = {};
   };
 
   return (
-    <div className="flex flex-col divide-y-2 items-center justify-center space-y-5 m-0 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
+    <div className="m-0 flex flex-col items-center justify-center space-y-5 divide-y-2 text-lg font-semibold text-[#55564E] md:text-xl lg:text-2xl">
       {types.map((type) => (
         <div
-          className="flex h-fit w-full flex-col items-center justify-around md:justify-around p-10 m-0"
+          className="m-0 flex h-fit w-full flex-col items-center justify-around p-10 md:justify-around"
           key={type}
         >
-          <Link href={`/Products/${type}`} className="pb-10">{type}</Link>
+          <Link href={`/Products/${type}`} className="pb-10">
+            {type}
+          </Link>
           <div className="hidden h-2/3 w-full items-center justify-around md:flex">
             {allProducts !== undefined &&
               allProducts.length !== 0 &&
               allProducts &&
               allProducts
                 .filter((product: any) => product.category === type)
-                .slice(0, 3)
+                .splice(0, 3)
                 .map((product: any) => (
                   <div
                     key={product._id}
-                    className="mx-auto hidden h-full basis-1/3 flex-col md:flex m-0"
+                    className="m-0 mx-auto hidden h-full basis-1/3 flex-col md:flex"
                   >
                     <div className="relative mx-auto flex h-fit w-fit items-center justify-center  ">
                       <Image
@@ -105,18 +107,23 @@ type Props = {};
                   </div>
                 ))}
           </div>
-          <div className="mx-auto flex h-fit w-full items-center justify-center overflow-hidden md:hidden">
+          <div className="mx-auto flex h-fit w-full items-center justify-center  overflow-hidden md:hidden">
             <Carousel
               showStatus={false}
               showIndicators={false}
-              showThumbs={false}
+              // showThumbs={true}
+              // infiniteLoop
+              // autoPlay
+              // interval={2000}
+              useKeyboardArrows={true}
+              thumbWidth={160}
             >
               {allProducts !== undefined &&
                 allProducts.length !== 0 &&
                 allProducts &&
                 allProducts
                   .filter((product: any) => product.category === type)
-                  .slice(0, 3)
+                  .splice(0, 3)
                   .map((product: any) => (
                     <div
                       key={product._id}
@@ -127,10 +134,9 @@ type Props = {};
                           quality={100}
                           width="200"
                           height="200"
-                          objectFit="fill"
                           src={`${backend_url}${product.image}`}
                           alt={product.name}
-                          className="mx-auto w-full h-full object-fill"
+                          className="mx-auto h-full w-full object-fill"
                         />
                         <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
                           <div className="flex basis-4/5 items-center justify-center gap-2">
@@ -173,7 +179,7 @@ type Props = {};
                         </div>
                       </div>
                       <div className="mx-auto flex w-[15rem] items-center justify-center gap-2 py-2 font-medium text-[#55564E]">
-                        <h1 className="text-center line-clamp-1 max-w-[7rem] text-sm sm:text-base">
+                        <h1 className="line-clamp-1 max-w-[7rem] text-center text-sm sm:text-base">
                           {product.name}
                         </h1>
                         |
