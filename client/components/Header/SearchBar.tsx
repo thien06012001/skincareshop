@@ -57,24 +57,26 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full bg-[#fff] shadow overflow-y-auto">
-          {searchData &&
-            searchData.map((i: any) => {
-              return (
-                <Link
-                  className="flex flex-col md:flex-row items-center justify-around"
-                  key={i._id}
-                  href={`/product/${i._id}`}
-                >
-                  <img
-                    src={`${backend_url}${i.image}`}
-                    alt={i.name}
-                    className="mr-2 h-[100px] w-[100px] object-fill"
-                  />
-                  <h5 className="w-full h-full line-clamp-2">{i.name}</h5>
-                </Link>
-              );
-            })}
+        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow ">
+          <div>
+            {searchData &&
+              searchData.map((i: any) => {
+                return (
+                  <Link
+                    className="flex flex-col items-center justify-around md:flex-row"
+                    key={i._id}
+                    href={`/product/${i._id}`}
+                  >
+                    <img
+                      src={`${backend_url}${i.image}`}
+                      alt={i.name}
+                      className="mr-2 h-[100px] w-[100px] object-fill"
+                    />
+                    <h5 className="line-clamp-2 h-full w-full">{i.name}</h5>
+                  </Link>
+                );
+              })}
+          </div>
         </div>
       ) : null}
     </form>
