@@ -57,27 +57,32 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow max-h-[50vh] sm:max-h-[45vh] md:max-h-[40vh] lg:max-h-[35vh] space-y-3">
-            {searchData &&
-              searchData.map((i: any) => {
-                return (
-                  <Link
-                    className="flex flex-col items-center justify-around md:flex-row"
-                    key={i._id}
-                    href={`/product/${i._id}`}
-                  >
-                    <img
-                      src={`${backend_url}${i.image}`}
-                      alt={i.name}
-                      className="mx-auto h-[100px] w-[100px] object-fill"
-                    />
-                    <h5 className="line-clamp-2 h-full w-full text-center">{i.name}</h5>
-                  </Link>
-                );
-              })}
-        
+        <div className="absolute left-0 z-10 max-h-[50vh] w-full space-y-3 overflow-auto bg-[#fff] shadow sm:max-h-[45vh] md:max-h-[40vh] lg:max-h-[35vh]">
+          {searchData &&
+            searchData.map((i: any) => {
+              return (
+                <Link
+                  className="flex flex-col items-center justify-around md:flex-row"
+                  key={i._id}
+                  href={`/product/${i._id}`}
+                >
+                  <img
+                    src={`${backend_url}${i.image}`}
+                    alt={i.name}
+                    className="mx-auto h-[100px] w-[100px] object-fill"
+                  />
+                  <h5 className="line-clamp-2 h-full w-full text-center">
+                    {i.name}
+                  </h5>
+                </Link>
+              );
+            })}
         </div>
-      ) : null}
+      ) : (
+        <div className="absolute left-0 z-10 max-h-[10vh] w-full bg-[#fff] shadow">
+          <h1 className="text-center">No result for: {searchTerm}</h1>
+        </div>
+      )}
     </form>
   );
 }
