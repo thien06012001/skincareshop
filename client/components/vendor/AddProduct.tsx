@@ -73,15 +73,6 @@ function AddProduct({}: Props) {
     newForm.append("ingredients", ingredients);
     newForm.append("shopId", user._id);
     dispatch(createProduct(newForm));
-    // setPrice("");
-    // setName("");
-    // setCategory("");
-    // setDescription("");
-    // setApplicationMode("");
-    // setIngredients("");
-    // setImage(null);
-    // setIsLoading(false);
-    
   };
   return (
     <form onSubmit={handleSubmit} className="flex min-h-screen flex-col">
@@ -188,7 +179,7 @@ function AddProduct({}: Props) {
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
-            <p>Max Words: 500</p>
+            <p>Max Characters: 500</p>
             <p className="w-full text-start">Application Mode</p>
             <textarea
               name=""
