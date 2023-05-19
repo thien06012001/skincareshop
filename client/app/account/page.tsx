@@ -1,8 +1,20 @@
 "use client";
+// RMIT University Vietnam
+// Course: COSC2430 Web Programming
+// Semester: 2023A
+// Assessment: Assignment 2
+// Author: 
+//   Chau Chan Bang(s3975015)
+//   Chau Chan Thien(s3975010)
+//   Ophelie Manon Tran(s3968993)
+//   Nguyen Dang Thanh Trung(s3978674)
+//   Han Yeeun(s3912055)
+// Acknowledgement: Acknowledge the resources that you use here.;
+
 import LoginForm from "@/components/Login/LoginForm";
 import RegisterForm from "@/components/Register/RegisterForm";
 import React from "react";
-import { redirect,useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -11,13 +23,13 @@ type Form = "Login" | "Register";
 function AccountPage({}: Props) {
   const [form, setForm] = useState<Form>("Login");
   const { isAuthenticated } = useSelector((state: any) => state.user);
-  const router = useRouter()
+  const router = useRouter();
   if (isAuthenticated) {
     redirect("/");
   }
   return (
     <div className="background relative flex h-screen w-full items-center justify-center bg-cover bg-no-repeat px-3 ">
-      <div className="absolute top-5 left-5" onClick={() => router.push('/')}>
+      <div className="absolute left-5 top-5" onClick={() => router.push("/")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
