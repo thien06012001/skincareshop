@@ -6,7 +6,7 @@ const ErrorHandler = require("./middleware/error");
 const path = require("path");
 const cors = require("cors");
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: 'https://skincareshop.vercel.app',
   credentials: true
 }));
 
