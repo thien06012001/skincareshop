@@ -40,7 +40,7 @@ function ShipperOrder() {
       )
       .then((res) => {
         toast.success("Order updated!");
-        router.push("/profile");
+        window.location.reload()
       })
       .catch((error) => {
         console.log(id)
