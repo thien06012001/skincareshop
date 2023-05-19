@@ -9,7 +9,7 @@ function HomePage({ }: Props) {
   return (
     
     <main>
-      
+        {/* Carousel section */}
         <HomePageCarousel />
 
         <Product />
