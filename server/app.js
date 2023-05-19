@@ -7,6 +7,7 @@ const path = require("path");
 const cors = require("cors");
 app.use(cors({
   origin: 'https://skincareshop.vercel.app',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true
 }));
 
