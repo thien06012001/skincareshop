@@ -108,7 +108,7 @@ function Header({}: Props) {
                 </span>
               </Link>
             ) : (
-              <Link href={"/account"}>
+              <Link href={"/account"}  className="flex items-center gap-1">
                 <BiUser className="m-auto h-8 w-8 cursor-pointer text-[#FAF7F6]" />
                 <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
                   Login
