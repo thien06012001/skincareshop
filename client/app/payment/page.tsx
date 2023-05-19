@@ -43,16 +43,16 @@ function PaymentPage({}: Props) {
   }, []);
   useEffect(() => {
     let timeoutId: any = null;
-  
+
     const checkUser = () => {
       if (!isAuthenticated || user === undefined) {
-        toast.error('Please login to access this page')
-        router.push('/account');
+        toast.error("Please login to access this page");
+        router.push("/account");
       }
     };
-  
+
     timeoutId = setTimeout(checkUser, 2000);
-  
+
     return () => {
       clearTimeout(timeoutId);
     };
@@ -119,8 +119,11 @@ function PaymentPage({}: Props) {
       .then((res) => {
         setOpen(false);
         toast.success("Order successful!");
-        localStorage.setItem("cartItems", JSON.stringify([]));
-        localStorage.setItem("latestOrder", JSON.stringify([]));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("cartItems", JSON.stringify([]));
+          localStorage.setItem("latestOrder", JSON.stringify([]));
+        }
+
         router.push("/order/success");
       });
   };
@@ -170,8 +173,10 @@ function PaymentPage({}: Props) {
               setOpen(false);
               router.push("/order/success");
               toast.success("Order successful!");
-              localStorage.setItem("cartItems", JSON.stringify([]));
-              localStorage.setItem("latestOrder", JSON.stringify([]));
+              if (typeof window !== "undefined") {
+                localStorage.setItem("cartItems", JSON.stringify([]));
+                localStorage.setItem("latestOrder", JSON.stringify([]));
+              }
             });
         }
       }
@@ -199,8 +204,11 @@ function PaymentPage({}: Props) {
         setOpen(false);
         router.push("/order/success");
         toast.success("Order successful!");
-        localStorage.setItem("cartItems", JSON.stringify([]));
-        localStorage.setItem("latestOrder", JSON.stringify([]));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("cartItems", JSON.stringify([]));
+          localStorage.setItem("latestOrder", JSON.stringify([]));
+        }
+
         // window.location.reload();
       });
   };

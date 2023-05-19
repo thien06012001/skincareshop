@@ -4,8 +4,10 @@ export const addTocart = (data: any) => async (dispatch: any, getState: any) => 
     type: "addToCart",
     payload: data,
   });
+  if (typeof window !== undefined) {
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
+  }
   return data;
 };
 
@@ -15,6 +17,9 @@ export const removeFromCart = (data: any) => async (dispatch: any, getState: any
     type: "removeFromCart",
     payload: data._id,
   });
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
+  if (typeof window !== undefined) {
+    localStorage.setItem("cartItems", JSON.stringify(getState().cart.cart));
+
+  }
   return data;
 };

@@ -128,7 +128,7 @@ function AllCategoryPage({ }: Props) {
           )}
           {isSort ? (
             <>
-              <div className="mx-auto my-12 flex items-center justify-center gap-3">
+              <div className="mx-auto my-12 flex items-center justify-evenly">
                 {listCategory.map((list: any) => (
                   <div
                     onClick={() => setType(list)}
@@ -161,7 +161,7 @@ function AllCategoryPage({ }: Props) {
                     .map((product: any) => (
                       <div
                         key={product._id}
-                        className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                        className="mx-auto items-center flex h-fit w-full flex-col gap-1 text-lg font-semibold text-[#55564E]"
                       >
                         <div className="relative h-[200px] w-[200px]">
                           <img
@@ -210,7 +210,7 @@ function AllCategoryPage({ }: Props) {
                           </div>
                         </div>
 
-                        <p className=" "> {product.name}</p>
+                        <p className="text-center text-base md:text-sm line-clamp-1 w-full"> {product.name}</p>
 
                         <p>${product.price}</p>
                       </div>
@@ -219,7 +219,7 @@ function AllCategoryPage({ }: Props) {
             </>
           ) : (
             <>
-              <div className="mx-auto my-12 flex items-center justify-center gap-3">
+              <div className="mx-auto my-12 flex items-center justify-evenly gap-3">
                 {listCategory.map((list: any) => (
                   <div
                     onClick={() => setType(list)}
@@ -245,13 +245,13 @@ function AllCategoryPage({ }: Props) {
                     .map((product: any) => (
                       <div
                         key={product._id}
-                        className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                        className="mx-auto flex h-fit w-full items-center flex-col gap-1 text-lg font-semibold text-[#55564E]"
                       >
                         <div className="relative h-[200px] w-[200px]">
                           <img
                             src={`${backend_url}${product.image}`}
                             alt={product.name}
-                            className="h-full w-full object-fill"
+                            className="h-full w-full object-fill mx-auto"
                           />
                           <div className="product absolute inset-0 z-20 flex h-full w-full flex-col opacity-0 transition-all duration-300 hover:opacity-100 ">
                             <div className="flex basis-4/5 items-center justify-center gap-2">
@@ -293,7 +293,7 @@ function AllCategoryPage({ }: Props) {
                             </Link>
                           </div>
                         </div>
-                        <p className=" "> {product.name}</p>
+                        <p className="text-center text-base md:text-sm line-clamp-1 w-full"> {product.name}</p>
 
                         <p>${product.price}</p>
                       </div>

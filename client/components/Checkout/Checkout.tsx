@@ -53,7 +53,10 @@ function Checkout() {
       };
 
       // update local storage with the updated orders array
-      localStorage.setItem("latestOrder", JSON.stringify(orderData));
+      if (typeof window !== undefined) {
+        localStorage.setItem("latestOrder", JSON.stringify(orderData));
+      }
+    
       router.push("/payment");
     }
   };

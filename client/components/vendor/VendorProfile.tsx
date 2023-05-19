@@ -39,7 +39,10 @@ function VendorProfile({}: Props) {
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         toast.success(res.data.message);
-        localStorage.setItem("cartItems", JSON.stringify([]));
+        if (typeof window !== 'undefined'){
+          localStorage.setItem("cartItems", JSON.stringify([]));
+        }
+        
         router.push("/loading");
       })
       .catch((error) => {

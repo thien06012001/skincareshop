@@ -35,7 +35,10 @@ function CustomerProfile({}: Props) {
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         router.push("/loading");
-        localStorage.setItem("cartItems", JSON.stringify([]));
+        if (typeof window !== 'undefined'){
+          localStorage.setItem("cartItems", JSON.stringify([]));
+        }
+       
         toast.success(res.data.message);
       })
       .catch((error) => {

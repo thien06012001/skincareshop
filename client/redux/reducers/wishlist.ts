@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
+const storage = localStorage.getItem("wishlistItems")
 
 const initialState = {
-  wishlist: localStorage.getItem("wishlistItems")
+  wishlist: storage
     ? JSON.parse(String(localStorage.getItem("wishlistItems")))
     : [],
 };

@@ -131,7 +131,7 @@ function AllCategoryPage({params:{type} }: Props) {
           )}
           {isSort ? (
             <>
-              <div className="mx-auto my-12 flex items-center justify-center gap-3">
+              <div className="mx-auto my-12 flex items-center justify-evenly ">
                 {listCategory.map((list: any) => (
                   <div
                     onClick={() => setCategory(list)}
@@ -164,7 +164,7 @@ function AllCategoryPage({params:{type} }: Props) {
                     .map((product: any) => (
                       <div
                         key={product._id}
-                        className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                        className="mx-auto flex h-fit w-full items-center flex-col gap-1 text-lg font-semibold text-[#55564E]"
                       >
                         <div className="relative h-[200px] w-[200px]">
                           <img
@@ -213,7 +213,7 @@ function AllCategoryPage({params:{type} }: Props) {
                           </div>
                         </div>
 
-                        <p className=" "> {product.name}</p>
+                        <p className="text-center text-base md:text-sm line-clamp-1 w-full "> {product.name}</p>
 
                         <p>${product.price}</p>
                       </div>
@@ -222,7 +222,7 @@ function AllCategoryPage({params:{type} }: Props) {
             </>
           ) : (
             <>
-              <div className="mx-auto my-12 flex items-center justify-center gap-3">
+              <div className="mx-auto my-12 flex items-center justify-evenly">
                 {listCategory.map((list: any) => (
                   <div
                     onClick={() => setCategory(list)}
@@ -248,7 +248,7 @@ function AllCategoryPage({params:{type} }: Props) {
                     .map((product: any) => (
                       <div
                         key={product._id}
-                        className="mx-auto flex h-fit w-fit flex-col gap-1 text-lg font-semibold text-[#55564E]"
+                        className="mx-auto flex h-fit w-full items-center flex-col gap-1 text-lg font-semibold text-[#55564E]"
                       >
                         <div className="relative h-[200px] w-[200px]">
                           <img
@@ -296,7 +296,7 @@ function AllCategoryPage({params:{type} }: Props) {
                             </Link>
                           </div>
                         </div>
-                        <p className=" "> {product.name}</p>
+                        <p className="text-center text-base md:text-sm line-clamp-1 w-full"> {product.name}</p>
 
                         <p>${product.price}</p>
                       </div>

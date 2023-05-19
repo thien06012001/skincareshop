@@ -5,8 +5,10 @@ export const addToWishlist = (data:any) => async (dispatch:any, getState:any) =>
       type: "addToWishlist",
       payload: data,
     });
-  
+  if (typeof window !== undefined) {
     localStorage.setItem("wishlistItems", JSON.stringify(getState().wishlist.wishlist));
+
+    }
     return data;
   };
   
@@ -16,7 +18,10 @@ export const addToWishlist = (data:any) => async (dispatch:any, getState:any) =>
       type: "removeFromWishlist",
       payload: data._id,
     });
-    localStorage.setItem("wishlistItems", JSON.stringify(getState().wishlist.wishlist));
+    if(typeof window !== undefined) {
+      localStorage.setItem("wishlistItems", JSON.stringify(getState().wishlist.wishlist));
+
+    }
     return data;
   };
   
