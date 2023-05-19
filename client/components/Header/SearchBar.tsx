@@ -57,8 +57,8 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow ">
-          <div>
+        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow max-h-[30vh]">
+        
             {searchData &&
               searchData.map((i: any) => {
                 return (
@@ -72,11 +72,11 @@ function SearchBar({}: Props) {
                       alt={i.name}
                       className="mr-2 h-[100px] w-[100px] object-fill"
                     />
-                    <h5 className="line-clamp-2 h-full w-full">{i.name}</h5>
+                    <h5 className="line-clamp-2 h-full w-full text-center">{i.name}</h5>
                   </Link>
                 );
               })}
-          </div>
+        
         </div>
       ) : null}
     </form>
