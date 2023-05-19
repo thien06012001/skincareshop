@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { RxCross1 } from "react-icons/rx";
 import { useRouter, redirect } from "next/navigation";
 import CheckoutSteps from "@/components/Checkout/CheckoutSteps";
-import styles from "@/styles/styles";
+
 type Props = {};
 interface Order {
   cart: any;
