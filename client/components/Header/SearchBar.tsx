@@ -57,8 +57,7 @@ function SearchBar({}: Props) {
         />
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
-        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow max-h-[30vh]">
-        
+        <div className="absolute left-0 z-10 w-full overflow-auto bg-[#fff] shadow max-h-[50vh] sm:max-h-[45vh] md:max-h-[40vh] lg:max-h-[35vh] space-y-3">
             {searchData &&
               searchData.map((i: any) => {
                 return (
@@ -70,7 +69,7 @@ function SearchBar({}: Props) {
                     <img
                       src={`${backend_url}${i.image}`}
                       alt={i.name}
-                      className="mr-2 h-[100px] w-[100px] object-fill"
+                      className="mx-auto h-[100px] w-[100px] object-fill"
                     />
                     <h5 className="line-clamp-2 h-full w-full text-center">{i.name}</h5>
                   </Link>
