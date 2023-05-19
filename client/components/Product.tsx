@@ -109,8 +109,7 @@ type Props = {};
             <Carousel
               showStatus={false}
               showIndicators={false}
-              // dynamicHeight
-              // showThumbs={false}
+              showThumbs={false}
             >
               {allProducts !== undefined &&
                 allProducts.length !== 0 &&

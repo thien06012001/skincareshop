@@ -45,8 +45,8 @@ function AddProduct({}: Props) {
     }
     if (success) {
       toast.success("Product created successfully!");
-      setIsLoading(false);
       window.location.reload();
+      
     }
   }, [dispatch, error, success]);
   const handleFileInputChange = (e: any) => {
@@ -73,14 +73,15 @@ function AddProduct({}: Props) {
     newForm.append("ingredients", ingredients);
     newForm.append("shopId", user._id);
     dispatch(createProduct(newForm));
-    setPrice("");
-    setName("");
-    setCategory("");
-    setDescription("");
-    setApplicationMode("");
-    setIngredients("");
-    setImage(null);
-    setIsLoading(false);
+    // setPrice("");
+    // setName("");
+    // setCategory("");
+    // setDescription("");
+    // setApplicationMode("");
+    // setIngredients("");
+    // setImage(null);
+    // setIsLoading(false);
+    
   };
   return (
     <form onSubmit={handleSubmit} className="flex min-h-screen flex-col">
@@ -182,6 +183,7 @@ function AddProduct({}: Props) {
             <textarea
               name=""
               id=""
+              value={description}
               className="min-h-[10rem] w-full bg-white px-2 py-1"
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
@@ -191,6 +193,7 @@ function AddProduct({}: Props) {
             <textarea
               name=""
               id=""
+              value={applicationMode}
               className="min-h-[10rem] w-full bg-white px-2 py-1"
               placeholder="Application Mode"
               onChange={(e) => setApplicationMode(e.target.value)}
@@ -199,6 +202,7 @@ function AddProduct({}: Props) {
             <textarea
               name=""
               id=""
+              value={ingredients}
               className="min-h-[10rem] w-full bg-white px-2 py-1"
               placeholder="Ingredients"
               onChange={(e) => setIngredients(e.target.value)}

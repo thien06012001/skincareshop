@@ -32,7 +32,7 @@ function VendorProfile({}: Props) {
   const [address, setAddress] = useState("");
   const [avatar, setAvatar] = useState(null);
   const dispatch = useAppDispatch();
-  const [option, setOption] = useState<options | string>("profile");
+  const [option, setOption] = useState<options | string>("add");
   const [show, setShow] = useState(false);
   const logoutHandler = () => {
     axios
