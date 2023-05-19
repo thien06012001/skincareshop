@@ -23,15 +23,23 @@ function SearchBar({}: Props) {
       );
     setSearchData(filteredProducts);
   };
-
+  console.log(active);
   return (
-    <form className="relative ml-auto w-[60%] md:mx-0 md:w-[40%]">
+    <form
+      // tabIndex={0}
+      // onBlur={() => setActive(false)}
+      className="relative ml-auto w-[60%] md:mx-0 md:w-[40%]"
+    >
       <input
         value={searchTerm}
         onChange={handleSearchChange}
         onFocus={() => setActive(true)}
-        // onBlur={() => setActive(false)}
         type="text"
+        onBlur={() =>
+          setTimeout(() => {
+            setActive(false);
+          }, 100)
+        }
         className={`border-b-2 ${quicksand.className} w-full border-[#FAF7F6] bg-transparent py-2 text-[#FAF7F6] placeholder:text-[#FAF7F6] focus:outline-none`}
         placeholder="Search"
       />
@@ -51,7 +59,7 @@ function SearchBar({}: Props) {
       </svg>
       {searchData && searchTerm !== "" && active === true ? (
         <div className="absolute left-0 z-10 w-full bg-[#fff] shadow">
-          <button className="w-full flex justify-end items-center p-3" onClick={() => setActive(false)}>
+          {/* <button className="w-full flex justify-end items-center p-3" onClick={() => setActive(false)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -66,21 +74,24 @@ function SearchBar({}: Props) {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
-          {searchData.map((i: any) => {
-            return (
-              <Link key={i._id} href={`/product/${i._id}`}>
-                <div className="flex items-center">
+          </button> */}
+          {searchData &&
+            searchData.map((i: any) => {
+              return (
+                <Link
+                  className="flex items-center justify-around"
+                  key={i._id}
+                  href={`/product/${i._id}`}
+                >
                   <img
                     src={`${backend_url}${i.image}`}
                     alt={i.name}
-                    className="mr-2 w-[30%]"
+                    className="mr-2 h-[100px] w-[100px] object-fill"
                   />
-                  <h5>{i.name}</h5>
-                </div>
-              </Link>
-            );
-          })}
+                  <h5 className="w-full h-full">{i.name}</h5>
+                </Link>
+              );
+            })}
         </div>
       ) : null}
     </form>

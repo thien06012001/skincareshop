@@ -1,24 +1,22 @@
-"use client";
-
+'use client'
 import React from "react";
 import HomePageCarousel from "@/components/Carousel";
 import Product from "@/components/Product";
-
 import Collection from "@/components/Collection";
-import Head from "next/head";
 type Props = {};
 
 function HomePage({}: Props) {
   return (
-    <main>
-      
-      <HomePageCarousel />
+    
+      <main>
+        <HomePageCarousel />
 
-      <Product />
+        <Product />
 
-      <hr className="my-12 w-full border" />
-      <Collection />
-    </main>
+        <hr className="my-12 w-full border" />
+        <Collection />
+      </main>
+
   );
 }
 

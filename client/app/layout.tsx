@@ -27,15 +27,16 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>Ivory</title>
+      </head>
+      <Head>
+        <link rel="shortcut icon" href="./favicon.ico" />
+      </Head>
       <body className={`bg-[#FBF6F6] ${montserrat.className}`}>
         <Providers>
           <Notify />
-          <Head>
-            <link rel="shortcut icon" href="./favicon.ico" />
-            <title>Home Page</title>
-          </Head>
           {pathname !== "/account" && pathname !== "/loading" && <Header />}
-
           {children}
           {pathname !== "/account" && pathname !== "/loading" && <Footer />}
         </Providers>

@@ -5,6 +5,7 @@ import React from "react";
 import { redirect,useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import logo from '../assets/346143109_218453740935825_5751210777328414100_n.png'
 type Props = {};
 type Form = "Login" | "Register";
 function AccountPage({}: Props) {

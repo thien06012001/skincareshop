@@ -43,56 +43,69 @@ function Header({}: Props) {
           className="h-12 w-12 object-contain sm:h-16 sm:w-16 md:h-20 md:w-20"
         />
       </Link>
-      <div className="flex w-[80%] items-center justify-around">
+      <div className="flex w-[85%] items-center justify-evenly">
         <SearchBar />
 
-        <div className="ml-auto mr-0 flex w-fit justify-end items-center md:justify-around md:mx-0 md:w-[45%]">
+        <div className="ml-auto mr-0 flex w-fit items-center justify-end md:mx-0 md:w-[45%] md:justify-around">
           <Link href={"/"} className="hidden items-center gap-1 md:flex">
-            <AiTwotoneHome className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
-            <span className="hidden text-[#FAF7F6] lg:inline-block">Home</span>
+            <AiTwotoneHome className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />
+            <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
+              Home
+            </span>
           </Link>
           <Link
             href={"/Products"}
             className="hidden items-center gap-1 md:flex"
           >
             <BiCategoryAlt className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
-            <span className="hidden text-[#FAF7F6] lg:inline-block">
+            <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
               Products
             </span>
           </Link>
           <div className="hidden items-center gap-1 md:flex">
-            <Link className="relative flex justify-center items-center py-1 " href={"/cart"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                />
-              </svg>
-              {cart && cart !== undefined && (
-                <span className="absolute -right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
-                  {cart?.length}
-                </span>
-              )}
+            <Link
+              className="flex justify-around items-center gap-2"
+              href={"/cart"}
+            >
+              <div className="relative items-center justify-center flex">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                  />
+                </svg>
+                {cart && cart !== undefined && (
+                  <span className="absolute -right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
+                    {cart?.length}
+                  </span>
+                )}
+              </div>
+
+              <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
+                Cart
+              </span>
             </Link>
-            <span className="hidden text-[#FAF7F6] lg:inline-block">Cart</span>
           </div>
 
           <div className="relative hidden h-11 w-11 items-center justify-center md:flex">
             {user ? (
-              <Link href="/profile">
+              <Link href="/profile" className="flex items-center gap-1">
                 <img
                   src={`${backend_url}${user.avatar}`}
                   className="m-auto h-11 w-11 cursor-pointer rounded-full object-cover"
                   alt={user.name}
                 />
+                <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
+                  Dashboard
+                </span>
               </Link>
             ) : (
               <BiUser
@@ -162,28 +175,34 @@ function Header({}: Props) {
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
 
                         <div className="flex items-center gap-1">
-                          <Link className="relative flex  py-1 " href={"/cart"}>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="currentColor"
-                              className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                              />
-                            </svg>
-                            {cart && cart !== undefined && (
-                              <span className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
-                                {cart?.length}
-                              </span>
-                            )}
+                          <Link
+                            className=" flex items-center gap-1"
+                            href={"/cart"}
+                          >
+                            <div className="relative">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                              </svg>
+                              {cart && cart !== undefined && (
+                                <span className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
+                                  {cart?.length}
+                                </span>
+                              )}
+                            </div>
+
+                            <span className="text-[#FAF7F6]">Cart</span>
                           </Link>
-                          <span className="text-[#FAF7F6]">Cart</span>
                         </div>
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
                       </div>
