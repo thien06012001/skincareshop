@@ -74,7 +74,7 @@ function Footer({}: Props) {
                 className="flex flex-col gap-1 text-sm font-light"
               >
                 {list.map((list) => (
-                  <Link href={`/category/${list}`} key={list}>
+                  <Link href={`/Products/${list}`} key={list}>
                     {list}
                   </Link>
                 ))}

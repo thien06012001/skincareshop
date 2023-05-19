@@ -144,7 +144,7 @@ function Header({}: Props) {
                     >
                       <div className="absolute right-0 top-5 flex flex-col bg-[#BBA999] px-3 py-5 ">
                         <Link
-                          href={"/profile"}
+                          href={"/profile"} onClick={() => setShow(false)}
                           className="flex items-center gap-1"
                         >
                           <img
@@ -155,7 +155,7 @@ function Header({}: Props) {
                           <span className="text-[#FAF7F6]">Profile</span>
                         </Link>
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
-                        <Link href={"/"} className=" flex items-center gap-1">
+                        <Link onClick={() => setShow(false)} href={"/"} className=" flex items-center gap-1">
                           <AiTwotoneHome className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
                           <span className=" inline-block text-[#FAF7F6]">
                             Home
@@ -163,7 +163,7 @@ function Header({}: Props) {
                         </Link>
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
 
-                        <Link
+                        <Link onClick={() => setShow(false)}
                           href={"/Products"}
                           className=" flex items-center gap-1"
                         >
@@ -175,7 +175,7 @@ function Header({}: Props) {
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
 
                         <div className="flex items-center gap-1">
-                          <Link
+                          <Link onClick={() => setShow(false)}
                             className=" flex items-center gap-1"
                             href={"/cart"}
                           >
@@ -195,7 +195,7 @@ function Header({}: Props) {
                                 />
                               </svg>
                               {cart && cart !== undefined && (
-                                <span className="absolute right-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
+                                <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
                                   {cart?.length}
                                 </span>
                               )}
