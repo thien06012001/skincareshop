@@ -52,7 +52,7 @@ function Product({}: Props) {
                     key={product._id}
                     className="m-0 mx-auto hidden h-full basis-1/3 flex-col md:flex"
                   >
-                    <div className="relative mx-auto flex h-fit w-fit items-center justify-center  ">
+                    <div className="relative mx-auto flex h-fit w-fit items-center justify-center ">
                       <Image
                         width={200}
                         height={200}

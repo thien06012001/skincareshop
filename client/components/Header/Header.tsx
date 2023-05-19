@@ -64,10 +64,10 @@ function Header({}: Props) {
           </Link>
           <div className="hidden items-center gap-1 md:flex">
             <Link
-              className="flex justify-around items-center gap-2"
+              className="flex items-center justify-around gap-2"
               href={"/cart"}
             >
-              <div className="relative items-center justify-center flex">
+              <div className="relative flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -108,10 +108,12 @@ function Header({}: Props) {
                 </span>
               </Link>
             ) : (
-              <BiUser
-                className="m-auto h-12 w-12 cursor-pointer text-[#FAF7F6]"
-                onClick={() => router.push("/account")}
-              />
+              <Link href={"/account"} className="flex items-center gap-1">
+                <BiUser className="m-auto h-8 w-8 cursor-pointer text-[#FAF7F6]" />
+                <span className="hidden text-sm text-[#FAF7F6] lg:inline-block">
+                  Login
+                </span>
+              </Link>
             )}
           </div>
           <div className=" flex h-11 w-11 items-center justify-center md:hidden ">
@@ -144,7 +146,8 @@ function Header({}: Props) {
                     >
                       <div className="absolute right-0 top-5 flex flex-col bg-[#BBA999] px-3 py-5 ">
                         <Link
-                          href={"/profile"} onClick={() => setShow(false)}
+                          href={"/profile"}
+                          onClick={() => setShow(false)}
                           className="flex items-center gap-1"
                         >
                           <img
@@ -155,7 +158,11 @@ function Header({}: Props) {
                           <span className="text-[#FAF7F6]">Profile</span>
                         </Link>
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
-                        <Link onClick={() => setShow(false)} href={"/"} className=" flex items-center gap-1">
+                        <Link
+                          onClick={() => setShow(false)}
+                          href={"/"}
+                          className=" flex items-center gap-1"
+                        >
                           <AiTwotoneHome className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
                           <span className=" inline-block text-[#FAF7F6]">
                             Home
@@ -163,7 +170,8 @@ function Header({}: Props) {
                         </Link>
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
 
-                        <Link onClick={() => setShow(false)}
+                        <Link
+                          onClick={() => setShow(false)}
                           href={"/Products"}
                           className=" flex items-center gap-1"
                         >
@@ -175,7 +183,8 @@ function Header({}: Props) {
                         <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
 
                         <div className="flex items-center gap-1">
-                          <Link onClick={() => setShow(false)}
+                          <Link
+                            onClick={() => setShow(false)}
                             className=" flex items-center gap-1"
                             href={"/cart"}
                           >
@@ -211,10 +220,103 @@ function Header({}: Props) {
                 </AnimatePresence>
               </div>
             ) : (
-              <BiUser
-                className="m-auto h-12 w-12 cursor-pointer text-[#FAF7F6]"
-                onClick={() => router.push("/account")}
-              />
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-6 w-6 cursor-pointer text-[#FAF7F6]"
+                  onClick={() => setShow(!show)}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+
+                <AnimatePresence>
+                  {show && (
+                    <motion.div
+                      className="relative"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div className="absolute right-0 top-5 flex flex-col bg-[#BBA999] px-3 py-5 ">
+                        <Link
+                          href={"/account"}
+                          className="flex items-center gap-1"
+                          onClick={() => setShow(false)}
+                        >
+                          <BiUser className=" h-8 w-8  text-[#FAF7F6]" />
+                          <span className="text-[#FAF7F6]">Login</span>
+                        </Link>
+                        <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
+                        <Link
+                          onClick={() => setShow(false)}
+                          href={"/"}
+                          className=" flex items-center gap-1"
+                        >
+                          <AiTwotoneHome className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
+                          <span className=" inline-block text-[#FAF7F6]">
+                            Home
+                          </span>
+                        </Link>
+                        <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
+
+                        <Link
+                          onClick={() => setShow(false)}
+                          href={"/Products"}
+                          className=" flex items-center gap-1"
+                        >
+                          <BiCategoryAlt className="h-8 w-8 cursor-pointer text-[#FAF7F6]" />{" "}
+                          <span className=" inline-block text-[#FAF7F6]">
+                            Products
+                          </span>
+                        </Link>
+                        <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
+
+                        <div className="flex items-center gap-1">
+                          <Link
+                            onClick={() => setShow(false)}
+                            className=" flex items-center gap-1"
+                            href={"/cart"}
+                          >
+                            <div className="relative">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="h-8 w-8 cursor-pointer text-[#FAF7F6]"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                              </svg>
+                              {cart && cart !== undefined && (
+                                <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-[#FAF7F6] text-center text-xs font-medium text-[#BBA999]">
+                                  {cart?.length}
+                                </span>
+                              )}
+                            </div>
+
+                            <span className="text-[#FAF7F6]">Cart</span>
+                          </Link>
+                        </div>
+                        <hr className="my-3 min-w-[5rem] border-2 border-[#FAF7F6]" />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </>
             )}
           </div>
         </div>
