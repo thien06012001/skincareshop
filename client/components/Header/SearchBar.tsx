@@ -78,11 +78,7 @@ function SearchBar({}: Props) {
               );
             })}
         </div>
-      ) : (
-        <div className="absolute left-0 z-10 max-h-[10vh] w-full bg-[#fff] shadow">
-          <h1 className="text-center">No result for: {searchTerm}</h1>
-        </div>
-      )}
+      ) : null}
     </form>
   );
 }
