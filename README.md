@@ -50,7 +50,7 @@ password: BachDa06012001#
 
 ```
 ## Git repository
-Our group git repo url: https://github.com/thien06012001/skincareshop.git
+[Our group git repo url:](https://github.com/thien06012001/skincareshop.git)
 ## Using you own stuff
 You can use your own database by replacing the DB_URL with your own mongodb url.
 And you can change the SMPT_MAIL with your own email and SMPT_PASSWORD with your own application password of Google account
