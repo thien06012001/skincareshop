@@ -1,5 +1,31 @@
 
 
+## Git repository
+Our group git repo url: https://github.com/thien06012001/skincareshop.git
+
+## Presentation video url
+https://www.youtube.com/watch?v=z_k2xDdFKgM
+
+## Account for testing
+Vendor
+```bash
+username: bach2002
+password: BachDa06012001#
+
+```
+Customer
+
+```bash
+username: phongchau0911
+password: BachDa06012001#
+
+```
+Shipper
+```bash
+username: bang070112004
+password: BachDa06012001#
+
+```
 ## Getting Started
 First, change the directory to server and client with 2 separate terminals:
 
@@ -29,24 +55,10 @@ nodemon index.js
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 The server will run on [http://localhost:9000](http://localhost:9000)
 You can start editing the page by modifying `client/app/page.tsx` `client/app/[folder]/page.tsx`. The page auto-updates as you edit the file.
-## Account
-Vendor
-```bash
-username: bach2002
-password: BachDa06012001#
 
-```
-Customer
-
+## Payment card for using payment page
 ```bash
-username: phongchau0911
-password: BachDa06012001#
-
-```
-Shipper
-```bash
-username: bang070112004
-password: BachDa06012001#
+card-number: 4242 4242 4242 4242
 
 ```
 ## Git repository
